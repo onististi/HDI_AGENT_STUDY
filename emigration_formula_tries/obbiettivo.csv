@@ -1,0 +1,50 @@
+Regione,Saldo_Migratorio_Interno_Percentuale
+Abruzzo,-0.4
+Basilicata,-0.57
+Calabria,-0.65
+Campania,-0.61
+Emilia-Romagna,0.36
+Friuli-Venezia Giulia,0.12
+Lazio,0.08
+Liguria,-0.11
+Lombardia,0.15
+Marche,-0.1
+Molise,-0.54
+Piemonte,0.05
+Puglia,-0.35
+Sardegna,-0.05
+Sicilia,-0.42
+Toscana,0.2
+Trentino-Alto Adige,0.3
+Umbria,-0.28
+Valle d'Aosta,-0.02
+Veneto,0.1
+
+
+Regione,Emigrazione_Annua_Stimata_%
+Calabria,13.0
+Sicilia,10.0
+Campania,8.5
+Puglia,7.0
+Molise,10.5
+Basilicata,9.0
+Sardegna,6.0
+Abruzzo,6.5
+Lazio,3.5
+Umbria,4.0
+Marche,4.0
+Toscana,3.5
+Liguria,2.5
+Piemonte,3.0
+Lombardia,2.5
+Veneto,3.0
+Friuli-Venezia Giulia,2.0
+Emilia-Romagna,2.5
+Trentino-Alto Adige,1.5
+Valle d'Aosta,1.0
+
+Categoria,Origine,Destinazione,Count,Total,Percentuale
+Disoccupato_Laurea,Italia,Estero,132000,352000,37.5
+Disoccupato_Diploma,Italia,Estero,220000,648000,33.9
+Lavoratore_Laurea,Italia,Estero,50000,352000,14.2
+Lavoratore_Diploma,Italia,Estero,100000,648000,15.4
