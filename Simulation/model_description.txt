@@ -1,0 +1,1 @@
+scenario.loader.class=repast.simphony.scenario.ScenarioLoader
