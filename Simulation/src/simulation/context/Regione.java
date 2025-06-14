@@ -10,6 +10,8 @@ public class Regione {
     public double servizi;
     public double latitudine;
     public double longitudine;
+    private int coordX;
+    private int coordY;
 
     public Regione(String nome, double popolazione, double salario, double occupazione,
                    double istruzione, double affitto, double servizi,
@@ -23,5 +25,14 @@ public class Regione {
         this.servizi = servizi;
         this.latitudine = latitudine;
         this.longitudine = longitudine;
+    }
+
+    public int getX() {return coordX;}
+
+    public int getY() {	return coordY;}
+
+    public void setCoord(int x, int y) {
+        this.coordX = x;
+        this.coordY = y;
     }
 }

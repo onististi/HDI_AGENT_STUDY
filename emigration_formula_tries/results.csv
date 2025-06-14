@@ -1,144 +1,137 @@
 categoria,origine,destinazione,count,total,percentuale
-Disoccupato_Laurea,Abruzzo,Lazio,1,100,1.0
-Disoccupato_Laurea,Abruzzo,Marche,1,100,1.0
-Disoccupato_Laurea,Abruzzo,Veneto,1,100,1.0
-TOTALE,Abruzzo,Lazio,1,400,0.25
-TOTALE,Abruzzo,Marche,1,400,0.25
-TOTALE,Abruzzo,Veneto,1,400,0.25
-TOTALE_RIEPILOGO,Abruzzo,,,,0.75%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=3.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
+Disoccupato_Laurea,Abruzzo,Emilia-Romagna,1,100,1.0
+Disoccupato_Laurea,Abruzzo,Lazio,2,100,2.0
+Disoccupato_Laurea,Abruzzo,Trentino-Alto Adige,2,100,2.0
+Lavoratore_Laurea,Abruzzo,Emilia-Romagna,1,100,1.0
+Lavoratore_Laurea,Abruzzo,Lazio,1,100,1.0
+TOTALE,Abruzzo,Emilia-Romagna,2,400,0.5
+TOTALE,Abruzzo,Lazio,3,400,0.75
+TOTALE,Abruzzo,Trentino-Alto Adige,2,400,0.5
+TOTALE_RIEPILOGO,Abruzzo,,,,1.75%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=5.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=2.00%,,,
 ,,,,,
-Disoccupato_Laurea,Basilicata,Abruzzo,1,100,1.0
+Disoccupato_Diploma,Basilicata,Emilia-Romagna,1,100,1.0
+Disoccupato_Diploma,Basilicata,Lazio,1,100,1.0
+Disoccupato_Laurea,Basilicata,Emilia-Romagna,1,100,1.0
+Disoccupato_Laurea,Basilicata,Lazio,1,100,1.0
+Disoccupato_Laurea,Basilicata,Marche,1,100,1.0
 Disoccupato_Laurea,Basilicata,Toscana,1,100,1.0
-Disoccupato_Laurea,Basilicata,Trentino-Alto Adige,1,100,1.0
-Disoccupato_Laurea,Basilicata,Umbria,1,100,1.0
-Disoccupato_Laurea,Basilicata,Veneto,2,100,2.0
 Lavoratore_Diploma,Basilicata,Lazio,1,100,1.0
-Lavoratore_Laurea,Basilicata,Emilia-Romagna,1,100,1.0
-Lavoratore_Laurea,Basilicata,Lazio,2,100,2.0
-Lavoratore_Laurea,Basilicata,Marche,1,100,1.0
-Lavoratore_Laurea,Basilicata,Umbria,1,100,1.0
-TOTALE,Basilicata,Abruzzo,1,400,0.25
-TOTALE,Basilicata,Emilia-Romagna,1,400,0.25
+TOTALE,Basilicata,Emilia-Romagna,2,400,0.5
 TOTALE,Basilicata,Lazio,3,400,0.75
 TOTALE,Basilicata,Marche,1,400,0.25
 TOTALE,Basilicata,Toscana,1,400,0.25
-TOTALE,Basilicata,Trentino-Alto Adige,1,400,0.25
-TOTALE,Basilicata,Umbria,2,400,0.5
-TOTALE,Basilicata,Veneto,2,400,0.5
-TOTALE_RIEPILOGO,Basilicata,,,,3.00%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=6.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=5.00%,,,
+TOTALE_RIEPILOGO,Basilicata,,,,1.75%
+,,Disoccupato_Diploma=2.00%; Disoccupato_Laurea=4.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=0.00%,,,
 ,,,,,
-Disoccupato_Laurea,Calabria,Lazio,2,100,2.0
-TOTALE,Calabria,Lazio,2,400,0.5
-TOTALE_RIEPILOGO,Calabria,,,,0.50%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=2.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
-,,,,,
-Disoccupato_Diploma,Campania,Abruzzo,1,100,1.0
-Disoccupato_Diploma,Campania,Emilia-Romagna,3,100,3.0
-Disoccupato_Diploma,Campania,Lazio,1,100,1.0
-Disoccupato_Diploma,Campania,Trentino-Alto Adige,1,100,1.0
-Disoccupato_Diploma,Campania,Veneto,4,100,4.0
-Disoccupato_Laurea,Campania,Abruzzo,1,100,1.0
-Disoccupato_Laurea,Campania,Emilia-Romagna,1,100,1.0
-Disoccupato_Laurea,Campania,Friuli-Venezia Giulia,1,100,1.0
-Disoccupato_Laurea,Campania,Lazio,2,100,2.0
-Disoccupato_Laurea,Campania,Marche,1,100,1.0
-Disoccupato_Laurea,Campania,Toscana,1,100,1.0
-Disoccupato_Laurea,Campania,Trentino-Alto Adige,1,100,1.0
-Disoccupato_Laurea,Campania,Veneto,1,100,1.0
-Lavoratore_Laurea,Campania,Lazio,1,100,1.0
-Lavoratore_Laurea,Campania,Toscana,1,100,1.0
-TOTALE,Campania,Abruzzo,2,400,0.5
-TOTALE,Campania,Emilia-Romagna,4,400,1.0
-TOTALE,Campania,Friuli-Venezia Giulia,1,400,0.25
-TOTALE,Campania,Lazio,4,400,1.0
-TOTALE,Campania,Marche,1,400,0.25
-TOTALE,Campania,Toscana,2,400,0.5
-TOTALE,Campania,Trentino-Alto Adige,2,400,0.5
-TOTALE,Campania,Veneto,5,400,1.25
-TOTALE_RIEPILOGO,Campania,,,,5.25%
-,,Disoccupato_Diploma=10.00%; Disoccupato_Laurea=9.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=2.00%,,,
-,,,,,
-Disoccupato_Diploma,Liguria,Lombardia,2,100,2.0
-Disoccupato_Laurea,Liguria,Emilia-Romagna,1,100,1.0
-Disoccupato_Laurea,Liguria,Lombardia,1,100,1.0
-TOTALE,Liguria,Emilia-Romagna,1,400,0.25
-TOTALE,Liguria,Lombardia,3,400,0.75
-TOTALE_RIEPILOGO,Liguria,,,,1.00%
-,,Disoccupato_Diploma=2.00%; Disoccupato_Laurea=2.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
-,,,,,
-Disoccupato_Diploma,Molise,Abruzzo,1,100,1.0
-Disoccupato_Diploma,Molise,Emilia-Romagna,2,100,2.0
-Disoccupato_Diploma,Molise,Lazio,1,100,1.0
-Disoccupato_Diploma,Molise,Toscana,1,100,1.0
-Disoccupato_Diploma,Molise,Trentino-Alto Adige,1,100,1.0
-Disoccupato_Diploma,Molise,Veneto,1,100,1.0
-Disoccupato_Laurea,Molise,Abruzzo,1,100,1.0
-Disoccupato_Laurea,Molise,Emilia-Romagna,1,100,1.0
-Disoccupato_Laurea,Molise,Lombardia,1,100,1.0
-Disoccupato_Laurea,Molise,Marche,3,100,3.0
-Disoccupato_Laurea,Molise,Puglia,1,100,1.0
-Disoccupato_Laurea,Molise,Trentino-Alto Adige,1,100,1.0
-Disoccupato_Laurea,Molise,Umbria,1,100,1.0
-Disoccupato_Laurea,Molise,Veneto,1,100,1.0
-Lavoratore_Diploma,Molise,Friuli-Venezia Giulia,1,100,1.0
-Lavoratore_Diploma,Molise,Lazio,2,100,2.0
-Lavoratore_Diploma,Molise,Marche,1,100,1.0
-Lavoratore_Laurea,Molise,Abruzzo,1,100,1.0
-Lavoratore_Laurea,Molise,Lazio,2,100,2.0
-Lavoratore_Laurea,Molise,Toscana,1,100,1.0
-TOTALE,Molise,Abruzzo,3,400,0.75
-TOTALE,Molise,Emilia-Romagna,3,400,0.75
-TOTALE,Molise,Friuli-Venezia Giulia,1,400,0.25
-TOTALE,Molise,Lazio,5,400,1.25
-TOTALE,Molise,Lombardia,1,400,0.25
-TOTALE,Molise,Marche,4,400,1.0
-TOTALE,Molise,Puglia,1,400,0.25
-TOTALE,Molise,Toscana,2,400,0.5
-TOTALE,Molise,Trentino-Alto Adige,2,400,0.5
-TOTALE,Molise,Umbria,1,400,0.25
-TOTALE,Molise,Veneto,2,400,0.5
-TOTALE_RIEPILOGO,Molise,,,,6.25%
-,,Disoccupato_Diploma=7.00%; Disoccupato_Laurea=10.00%; Lavoratore_Diploma=4.00%; Lavoratore_Laurea=4.00%,,,
-,,,,,
-Disoccupato_Laurea,Piemonte,Lombardia,1,100,1.0
-Lavoratore_Diploma,Piemonte,Lombardia,1,100,1.0
-TOTALE,Piemonte,Lombardia,2,400,0.5
-TOTALE_RIEPILOGO,Piemonte,,,,0.50%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=1.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=0.00%,,,
-,,,,,
-Disoccupato_Laurea,Puglia,Trentino-Alto Adige,1,100,1.0
-Lavoratore_Diploma,Puglia,Emilia-Romagna,1,100,1.0
-TOTALE,Puglia,Emilia-Romagna,1,400,0.25
-TOTALE,Puglia,Trentino-Alto Adige,1,400,0.25
-TOTALE_RIEPILOGO,Puglia,,,,0.50%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=1.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=0.00%,,,
-,,,,,
-Disoccupato_Laurea,Sardegna,Lazio,1,100,1.0
-TOTALE,Sardegna,Lazio,1,400,0.25
-TOTALE_RIEPILOGO,Sardegna,,,,0.25%
+Disoccupato_Laurea,Calabria,Emilia-Romagna,1,100,1.0
+TOTALE,Calabria,Emilia-Romagna,1,400,0.25
+TOTALE_RIEPILOGO,Calabria,,,,0.25%
 ,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=1.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
 ,,,,,
-Disoccupato_Laurea,Sicilia,Emilia-Romagna,2,100,2.0
-Lavoratore_Diploma,Sicilia,Lazio,1,100,1.0
-Lavoratore_Laurea,Sicilia,Lazio,2,100,2.0
-TOTALE,Sicilia,Emilia-Romagna,2,400,0.5
-TOTALE,Sicilia,Lazio,3,400,0.75
-TOTALE_RIEPILOGO,Sicilia,,,,1.25%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=2.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=2.00%,,,
+Disoccupato_Diploma,Campania,Lazio,2,100,2.0
+Disoccupato_Diploma,Campania,Marche,1,100,1.0
+Disoccupato_Diploma,Campania,Veneto,1,100,1.0
+Disoccupato_Laurea,Campania,Emilia-Romagna,1,100,1.0
+Disoccupato_Laurea,Campania,Lazio,1,100,1.0
+Disoccupato_Laurea,Campania,Lombardia,1,100,1.0
+Disoccupato_Laurea,Campania,Toscana,1,100,1.0
+Disoccupato_Laurea,Campania,Umbria,1,100,1.0
+Disoccupato_Laurea,Campania,Veneto,1,100,1.0
+Lavoratore_Diploma,Campania,Emilia-Romagna,1,100,1.0
+Lavoratore_Laurea,Campania,Lazio,3,100,3.0
+TOTALE,Campania,Emilia-Romagna,2,400,0.5
+TOTALE,Campania,Lazio,6,400,1.5
+TOTALE,Campania,Lombardia,1,400,0.25
+TOTALE,Campania,Marche,1,400,0.25
+TOTALE,Campania,Toscana,1,400,0.25
+TOTALE,Campania,Umbria,1,400,0.25
+TOTALE,Campania,Veneto,2,400,0.5
+TOTALE_RIEPILOGO,Campania,,,,3.50%
+,,Disoccupato_Diploma=4.00%; Disoccupato_Laurea=6.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=3.00%,,,
 ,,,,,
-Disoccupato_Diploma,Toscana,Emilia-Romagna,3,100,3.0
-Disoccupato_Laurea,Toscana,Emilia-Romagna,1,100,1.0
-TOTALE,Toscana,Emilia-Romagna,4,400,1.0
-TOTALE_RIEPILOGO,Toscana,,,,1.00%
-,,Disoccupato_Diploma=3.00%; Disoccupato_Laurea=1.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
+Lavoratore_Laurea,Liguria,Emilia-Romagna,1,100,1.0
+Lavoratore_Laurea,Liguria,Lombardia,1,100,1.0
+TOTALE,Liguria,Emilia-Romagna,1,400,0.25
+TOTALE,Liguria,Lombardia,1,400,0.25
+TOTALE_RIEPILOGO,Liguria,,,,0.50%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=0.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=2.00%,,,
 ,,,,,
-Disoccupato_Laurea,Umbria,Emilia-Romagna,1,100,1.0
-Disoccupato_Laurea,Umbria,Lazio,1,100,1.0
-Lavoratore_Laurea,Umbria,Emilia-Romagna,1,100,1.0
-Lavoratore_Laurea,Umbria,Lazio,1,100,1.0
-TOTALE,Umbria,Emilia-Romagna,2,400,0.5
-TOTALE,Umbria,Lazio,2,400,0.5
+Disoccupato_Laurea,Marche,Emilia-Romagna,2,100,2.0
+TOTALE,Marche,Emilia-Romagna,2,400,0.5
+TOTALE_RIEPILOGO,Marche,,,,0.50%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=2.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
+,,,,,
+Disoccupato_Diploma,Molise,Abruzzo,3,100,3.0
+Disoccupato_Diploma,Molise,Friuli-Venezia Giulia,2,100,2.0
+Disoccupato_Diploma,Molise,Lazio,1,100,1.0
+Disoccupato_Laurea,Molise,Abruzzo,1,100,1.0
+Disoccupato_Laurea,Molise,Lazio,5,100,5.0
+Disoccupato_Laurea,Molise,Lombardia,2,100,2.0
+Disoccupato_Laurea,Molise,Marche,1,100,1.0
+Disoccupato_Laurea,Molise,Toscana,2,100,2.0
+Disoccupato_Laurea,Molise,Trentino-Alto Adige,1,100,1.0
+Lavoratore_Diploma,Molise,Emilia-Romagna,1,100,1.0
+Lavoratore_Laurea,Molise,Friuli-Venezia Giulia,1,100,1.0
+Lavoratore_Laurea,Molise,Lazio,1,100,1.0
+Lavoratore_Laurea,Molise,Trentino-Alto Adige,1,100,1.0
+TOTALE,Molise,Abruzzo,4,400,1.0
+TOTALE,Molise,Emilia-Romagna,1,400,0.25
+TOTALE,Molise,Friuli-Venezia Giulia,3,400,0.75
+TOTALE,Molise,Lazio,7,400,1.75
+TOTALE,Molise,Lombardia,2,400,0.5
+TOTALE,Molise,Marche,1,400,0.25
+TOTALE,Molise,Toscana,2,400,0.5
+TOTALE,Molise,Trentino-Alto Adige,2,400,0.5
+TOTALE_RIEPILOGO,Molise,,,,5.50%
+,,Disoccupato_Diploma=6.00%; Disoccupato_Laurea=12.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=3.00%,,,
+,,,,,
+Disoccupato_Laurea,Piemonte,Lombardia,3,100,3.0
+Lavoratore_Laurea,Piemonte,Lombardia,1,100,1.0
+TOTALE,Piemonte,Lombardia,4,400,1.0
+TOTALE_RIEPILOGO,Piemonte,,,,1.00%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=3.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=1.00%,,,
+,,,,,
+Disoccupato_Laurea,Puglia,Emilia-Romagna,2,100,2.0
+Disoccupato_Laurea,Puglia,Friuli-Venezia Giulia,1,100,1.0
+Disoccupato_Laurea,Puglia,Marche,1,100,1.0
+Disoccupato_Laurea,Puglia,Veneto,1,100,1.0
+Lavoratore_Diploma,Puglia,Lazio,1,100,1.0
+Lavoratore_Laurea,Puglia,Emilia-Romagna,1,100,1.0
+TOTALE,Puglia,Emilia-Romagna,3,400,0.75
+TOTALE,Puglia,Friuli-Venezia Giulia,1,400,0.25
+TOTALE,Puglia,Lazio,1,400,0.25
+TOTALE,Puglia,Marche,1,400,0.25
+TOTALE,Puglia,Veneto,1,400,0.25
+TOTALE_RIEPILOGO,Puglia,,,,1.75%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=5.00%; Lavoratore_Diploma=1.00%; Lavoratore_Laurea=1.00%,,,
+,,,,,
+Lavoratore_Laurea,Sardegna,Lazio,1,100,1.0
+TOTALE,Sardegna,Lazio,1,400,0.25
+TOTALE_RIEPILOGO,Sardegna,,,,0.25%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=0.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=1.00%,,,
+,,,,,
+Disoccupato_Laurea,Sicilia,Emilia-Romagna,1,100,1.0
+Disoccupato_Laurea,Sicilia,Lazio,1,100,1.0
+TOTALE,Sicilia,Emilia-Romagna,1,400,0.25
+TOTALE,Sicilia,Lazio,1,400,0.25
+TOTALE_RIEPILOGO,Sicilia,,,,0.50%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=2.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,
+,,,,,
+Disoccupato_Diploma,Toscana,Emilia-Romagna,2,100,2.0
+Lavoratore_Laurea,Toscana,Emilia-Romagna,1,100,1.0
+TOTALE,Toscana,Emilia-Romagna,3,400,0.75
+TOTALE_RIEPILOGO,Toscana,,,,0.75%
+,,Disoccupato_Diploma=2.00%; Disoccupato_Laurea=0.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=1.00%,,,
+,,,,,
+Disoccupato_Laurea,Umbria,Emilia-Romagna,3,100,3.0
+Lavoratore_Laurea,Umbria,Lombardia,1,100,1.0
+TOTALE,Umbria,Emilia-Romagna,3,400,0.75
+TOTALE,Umbria,Lombardia,1,400,0.25
 TOTALE_RIEPILOGO,Umbria,,,,1.00%
-,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=2.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=2.00%,,,
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=3.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=1.00%,,,
+,,,,,
+Disoccupato_Laurea,Veneto,Emilia-Romagna,1,100,1.0
+TOTALE,Veneto,Emilia-Romagna,1,400,0.25
+TOTALE_RIEPILOGO,Veneto,,,,0.25%
+,,Disoccupato_Diploma=0.00%; Disoccupato_Laurea=1.00%; Lavoratore_Diploma=0.00%; Lavoratore_Laurea=0.00%,,,

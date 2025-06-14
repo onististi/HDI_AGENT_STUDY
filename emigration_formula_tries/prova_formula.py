@@ -51,6 +51,8 @@ def normalize(x, min_x, max_x, eps=1e-6):
 def normalize_pushpull(x, min_x, max_x):
     mid = (max_x + min_x) / 2
     half_range = (max_x - min_x) / 2
+    if abs(half_range) < 1e-6:
+        return 0
     return (x - mid) / half_range
 
 def compute_gravity(pop_orig, pop_dest, distance_km):
@@ -73,7 +75,6 @@ def compute_pushpull(agent, orig, dest):
         w["Occupazione"] * (dest["Occupazione"] - orig["Occupazione"]) +
         w["Servizi"] * (dest["Servizi"] - orig["Servizi"])
     )
-
 
 def generate_agents(df, n):
     id_counter = 0
@@ -111,7 +112,7 @@ def generate_agents(df, n):
                     "weights": config["weights"].copy(),
                     "utility_weights": config["utility_weights"].copy(),
                     "pushpull_weights": config["pushpull_weights"].copy(),
-                    "soglia": config["soglia"],
+                    "soglia_base": config["soglia"],  # Mantieni la soglia base separata
                     "eta": random.randint(*config["età"]),
                     "famiglia": random.choice([True, False]),
                     "anni_disoccupato": random.randint(0, 5),
@@ -130,7 +131,7 @@ def noise(agent):
         sigma = 0.02 if not agent["famiglia"] else 0.01
     else:
         sigma = 0.005
-    if "Laurea" in agent["categoria"]:    #<30 inpulsivo ma se ha laurea anhce informato, se ha famiglia piu prudente
+    if "Laurea" in agent["categoria"]:
         sigma *= 0.8
     return np.random.normal(0, sigma)
 
@@ -163,10 +164,12 @@ def adjust_agent(agent):
         pw["Salario"] *= 1.2
     total_p = sum(pw.values())
     for k in pw:
-        pw[k] /= total_p        #normalizzazioni
+        pw[k] /= total_p
 
-def calculate_treshold(agent, orig_region,distance):
-    soglia = agent["soglia"]
+def calculate_treshold(agent, orig_region, distance):
+    # FIX: Parti sempre dalla soglia base
+    soglia = agent["soglia_base"]
+    
     if agent["famiglia"]:
         soglia += 0.12
     if agent["eta"] > 35:
@@ -177,8 +180,8 @@ def calculate_treshold(agent, orig_region,distance):
         soglia += 0.01
     if distance > 200:
         soglia += ((distance - 200) / 100) * 0.05 * (2000 / (orig_region["Salario"] + 1e-6))
-    agent["soglia"] = soglia
-
+    
+    return soglia
 
 def decide(agent, df, extremes_per_category):
     category = agent["categoria"]
@@ -187,9 +190,10 @@ def decide(agent, df, extremes_per_category):
     candidati = df[df["Nome"] != orig["Nome"]].sample(n=min(10, len(df)-1))
     utility_orig = normalize(compute_utility(agent, orig), extremes["min_utility"], extremes["max_utility"])
     log = []
+    
     for _, dest in candidati.iterrows():
         distance = calculate_distance(orig, dest)
-        calculate_treshold(agent, orig, distance)
+        soglia_calcolata = calculate_treshold(agent, orig, distance)
         gravity = compute_gravity(orig["Popolazione"], dest["Popolazione"], distance)
 
         gravity_norm = normalize(gravity, extremes["min_gravity"], extremes["max_gravity"])
@@ -199,7 +203,7 @@ def decide(agent, df, extremes_per_category):
         attr = (agent["weights"][0] * gravity_norm +
                 agent["weights"][1] * (utility_dest - utility_orig) +
                 agent["weights"][2] * pushpull_norm)
-        emigrato = attr > agent["soglia"] + noise(agent)
+        emigrato = attr > soglia_calcolata + noise(agent)
 
         log.append({
             "id_agente": agent["id_agente"],
@@ -209,7 +213,7 @@ def decide(agent, df, extremes_per_category):
             "famiglia": agent["famiglia"],
             "anni_stab": agent["anni_stabile"],
             "attrattivita": round(attr, 4),
-            "soglia": round(agent["soglia"], 4),
+            "soglia": round(soglia_calcolata, 4),
             "eta": agent["eta"],
             "emigrato": emigrato,
             "gravity": round(gravity_norm, 4),
@@ -281,7 +285,7 @@ def print_summary(df_log):
     df_final = pd.DataFrame(final_rows, columns=["categoria", "origine", "destinazione", "count", "total", "percentuale"])
     df_final.to_csv("results.csv", index=False)
 
-    print("\n📊 SALDO MIGRATORIO REGIONALE (percentuale)")
+    print("\n SALDO MIGRATORIO REGIONALE (percentuale)")
     immigrati = unique.groupby("destinazione").size().reset_index(name="immigrati")
     emigrati = unique.groupby("origine").size().reset_index(name="emigrati")
     popolazione_simulata = df_log.drop_duplicates(subset=["id_agente"]).groupby("origine").size().reset_index(name="pop")
