@@ -1,4 +1,6 @@
 package simulation.context;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Point;
 
 public class Regione {
     public String nome;
@@ -8,14 +10,14 @@ public class Regione {
     public double istruzione;
     public double affitto;
     public double servizi;
-    public double latitudine;
-    public double longitudine;
+    public Coordinate coordinate;
+    public Point location;
     private int coordX;
     private int coordY;
 
     public Regione(String nome, double popolazione, double salario, double occupazione,
                    double istruzione, double affitto, double servizi,
-                   double latitudine, double longitudine) {
+                   Coordinate coord) {
         this.nome = nome;
         this.popolazione = popolazione;
         this.salario = salario;
@@ -23,8 +25,7 @@ public class Regione {
         this.istruzione = istruzione;
         this.affitto = affitto;
         this.servizi = servizi;
-        this.latitudine = latitudine;
-        this.longitudine = longitudine;
+        this.coordinate = coord;
     }
 
     public int getX() {return coordX;}
@@ -35,4 +36,5 @@ public class Regione {
         this.coordX = x;
         this.coordY = y;
     }
-}
+    public String getNome() {return this.nome;}
+	}

@@ -129,8 +129,8 @@ public static double noise(Random rnd, int eta, boolean famiglia, boolean laurea
 }
 
 public static double distanza(Regione a, Regione b) {
-    double dx = a.latitudine - b.latitudine;
-    double dy = a.longitudine - b.longitudine;
+    double dx = a.coordinate.y - b.coordinate.y; // y is latitude
+    double dy = a.coordinate.x - b.coordinate.x; // x is longitude
     return Math.sqrt(dx * dx + dy * dy);
 }
 

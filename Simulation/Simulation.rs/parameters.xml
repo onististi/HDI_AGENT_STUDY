@@ -1,6 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <parameters>
-
-	<parameter name="randomSeed" displayName="Default Random Seed" type="int" defaultValue="__NULL__" />
-
+    <parameter name="randomSeed" type="int" defaultValue="0" displayName="Default Random Seed"/>
+    
+    <parameter name="dataset" type="string" defaultValue="regioni_istat.csv" displayName="Dataset da utilizzare" inputType="select">
+        <choice value="regioni_istat.csv" displayValue="Regioni ISTAT"/>
+        <choice value="divario_ampliato.csv" displayValue="Divario Ampliato"/>
+    </parameter>
+    
+    <parameter name="agentiPerRegione" type="int" defaultValue="60" displayName="Agenti per regione" inputType="select">
+        <choice value="60" displayValue="60 (veloce)"/>
+        <choice value="120" displayValue="120 (bilanciato)"/>
+        <choice value="300" displayValue="300 (precisa)"/>
+        <choice value="500" displayValue="500 (molto precisa)"/>
+    </parameter>
+    
+    <parameter name="migrationThreshold" type="double" defaultValue="0.1" displayName="Soglia di migrazione" inputType="select">
+        <choice value="0.1" displayValue="10%"/>
+        <choice value="0.05" displayValue="5%"/>
+        <choice value="0.2" displayValue="20%"/>
+    </parameter>
 </parameters>

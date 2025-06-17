@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display name="Mappa Italia" type="repast.simphony.visualization.grid.Grid2DDisplay">
+    <grid name="GridItalia"/>
+    <style class="simulation.agent.Agent" styleClass="simulation.visualization.AgentStyle"/>
+    <style class="simulation.context.Regione" styleClass="simulation.visualization.RegioneStyle"/>
+    <background>
+        <image file="data/mappa_italia.png" stretch="true"/>
+    </background>
+    <properties>
+        <property name="cellSize" value="50"/>
+    </properties>
+</display>

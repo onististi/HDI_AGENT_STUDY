@@ -1,100 +1,89 @@
 package simulation.context;
+
 import simulation.agent.Agent;
 import simulation.utils.DataManager;
 import simulation.utils.DecisionUtils;
 import simulation.utils.MigrationReporter;
+import simulation.visualization.MigrationAnimation;
+import simulation.visualization.MigrationMarker;
 import repast.simphony.context.Context;
 import repast.simphony.context.space.grid.GridFactory;
 import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.environment.RunListener;
-import repast.simphony.engine.environment.RunState;
+import repast.simphony.parameter.Parameters;
 import repast.simphony.space.grid.*;
-import java.util.*;public class ItalianRegionsContext implements ContextBuilder<Object> {
+import repast.simphony.space.gis.Geography;
+import repast.simphony.space.gis.GeographyParameters;
+import repast.simphony.context.space.gis.GeographyFactory;
+import repast.simphony.context.space.gis.GeographyFactoryFinder;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import java.util.*;
 
-	private Map<String, Regione> regioniMap; // Aggiungi questa variabile per mantenerla
+public class ItalianRegionsContext implements ContextBuilder<Object> {
 
-	public static final Map<String, int[]> posizioniRegioni = Map.ofEntries(
-	    Map.entry("Piemonte", new int[]{0, 0}),
-	    Map.entry("Valle d'Aosta", new int[]{0, 1}),
-	    Map.entry("Lombardia", new int[]{0, 2}),
-	    Map.entry("Trentino-Alto Adige", new int[]{0, 3}),
-	    Map.entry("Veneto", new int[]{0, 4}),
-	    Map.entry("Friuli-Venezia Giulia", new int[]{0, 5}),
-	    Map.entry("Liguria", new int[]{1, 0}),
-	    Map.entry("Emilia-Romagna", new int[]{1, 2}),
-	    Map.entry("Toscana", new int[]{2, 1}),
-	    Map.entry("Umbria", new int[]{2, 2}),
-	    Map.entry("Marche", new int[]{2, 3}),
-	    Map.entry("Lazio", new int[]{3, 2}),
-	    Map.entry("Abruzzo", new int[]{3, 3}),
-	    Map.entry("Molise", new int[]{3, 4}),
-	    Map.entry("Campania", new int[]{4, 2}),
-	    Map.entry("Puglia", new int[]{4, 3}),
-	    Map.entry("Basilicata", new int[]{4, 4}),
-	    Map.entry("Calabria", new int[]{5, 3}),
-	    Map.entry("Sicilia", new int[]{5, 1}),
-	    Map.entry("Sardegna", new int[]{5, 0})
-	);
+    private Map<String, Regione> regioniMap;
+    private List<MigrationMarker> activeAnimations;
 
-	@Override
-	public Context<Object> build(Context<Object> context) {
-	    context.setId("Italia");
-	    
-	    regioniMap = DataManager.caricaRegioni("data/regioni_istat.csv");
-	    List<Regione> regList = new ArrayList<>(regioniMap.values());
-	    
-	    DataManager.inizializzaLog("data/log.csv");
-	    DecisionUtils.calcolaEstremiPerCategoria(regList);
-	    
-	    GridFactory factory = GridFactoryFinder.createGridFactory(null);
-	    Grid<Object> grid = factory.createGrid("GridItalia", context,
-	        new GridBuilderParameters<>(new WrapAroundBorders(), new SimpleGridAdder<>(), true, 6, 6));
-	    
-	    for (Regione r : regList) {
-	        context.add(r);
-	        int[] coord = posizioniRegioni.get(r.nome);
-	        r.setCoord(coord[0], coord[1]);
-	        grid.moveTo(r, coord[0], coord[1]);
-	        int n = (int) (r.popolazione * 10); // ridotto per debug ogni agente 100.000 persone
-	        for (int i = 0; i < n; i++) {
-	            Agent p = Agent.creaRandom(r, regList, grid);
-	            context.add(p);
-	            grid.moveTo(p, coord[0], coord[1]);
-	        }
-	    }
-	    
-	    MigrationReporter reporter = new MigrationReporter(regioniMap, "data/log.csv");
-	    context.add(reporter);
-	    
-	    RunEnvironment.getInstance().addRunListener(new RunListener() {
-	        @Override
-	        public void stopped() {
-	            System.out.println("Simulazione terminata. Calcolo del saldo migratorio finale...");
-	            DataManager.stampaSaldoMigratorioFinale("data/log.csv", regioniMap);
-	        }
+    @Override
+    public Context<Object> build(Context<Object> context) {
+        context.setId("Italia");
 
-			@Override
-			public void paused() {
-				// TODO Auto-generated method stub
-				
-			}
+        Parameters params = RunEnvironment.getInstance().getParameters();
+        int agentiPerRegione = params.getInteger("agentiPerRegione");
+        double migrationThreshold = params.getDouble("migrationThreshold");
 
-			@Override
-			public void started() {
-				// TODO Auto-generated method stub
-				
-			}
+        String selectedDataset = params.getString("dataset");
+        if (selectedDataset == null)
+            selectedDataset = "regioni_istat.csv";
+        String csvPath = "data/" + selectedDataset;
 
-			@Override
-			public void restarted() {
-				// TODO Auto-generated method stub
-				
-			}
-	    });
-	    
-	    RunEnvironment.getInstance().endAt(13); // 1 anni
-	    return context;
-	}
+        regioniMap = DataManager.caricaRegioni(csvPath);
+        List<Regione> regList = new ArrayList<>(regioniMap.values());
+
+        DataManager.inizializzaLog("data/log.csv");
+        DecisionUtils.calcolaEstremiPerCategoria(regList);
+        
+        GeographyParameters<Object> geoParams = new GeographyParameters<Object>();
+		Geography<Object> geography = GeographyFactoryFinder.createGeographyFactory(null).createGeography("Geography", context, geoParams);
+       
+		activeAnimations = new ArrayList<>();
+
+        for (Regione r : regList) {
+            context.add(r);
+            r.location =  new GeometryFactory().createPoint(r.coordinate);
+            geography.move(r, r.location);
+
+            for (int i = 0; i < agentiPerRegione; i++) {
+                Agent p = Agent.creaRandom(r, regList);
+                context.add(p);
+            }
+        }
+
+        MigrationReporter reporter = new MigrationReporter(regioniMap, "data/log.csv", agentiPerRegione, 0, geography, activeAnimations);
+        context.add(reporter);
+
+        RunEnvironment.getInstance().addRunListener(new RunListener() {
+            @Override
+            public void stopped() {
+                System.out.println("Simulazione terminata. Calcolo del saldo migratorio finale...");
+               // DataManager.stampaSaldoMigratorioFinale("data/log.csv", regioniMap);
+            }
+
+            @Override
+            public void paused() {}
+
+            @Override
+            public void started() {}
+
+            @Override
+            public void restarted() {}
+        });
+
+        RunEnvironment.getInstance().endAt(24);
+        return context;
+    }
 }
