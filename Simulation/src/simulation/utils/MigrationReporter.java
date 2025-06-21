@@ -1,14 +1,14 @@
 package simulation.utils;
-
 import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.space.gis.Geography;
 import repast.simphony.util.ContextUtils;
 import simulation.context.Regione;
-import simulation.visualization.MigrationAnimation;
+import simulation.utils.DataManager;
 import simulation.visualization.MigrationMarker;
 
+import java.io.IOException;
 import java.util.*;
 
 public class MigrationReporter {
@@ -18,6 +18,7 @@ public class MigrationReporter {
     private double migrationThreshold;
     private Geography<Object> geography;
     private List<MigrationMarker> activeAnimations;
+    private int lastProcessedYear = -1;
 
     public MigrationReporter(Map<String, Regione> regioniMap, String logPath, 
                            int agentiPerRegione, double migrationThreshold, 
@@ -30,7 +31,15 @@ public class MigrationReporter {
         this.activeAnimations = activeAnimations;
     }
 
-    @ScheduledMethod(start = 12, interval = 1, priority = 1) // Esecuzione ad ogni tick per fluidità
+    
+    @ScheduledMethod(start = 12, interval = 12, priority = 1)
+    public void stampa() throws IOException {
+        int currentTick = (int) RunEnvironment.getInstance().getCurrentSchedule().getTickCount();
+        int anno = (currentTick - 12) / 12; // Year 0 at tick 12, year 1 at tick 24
+        DataManager.stampaSaldoAnnuale(logPath, regioniMap, anno, agentiPerRegione);
+    }
+    
+    @ScheduledMethod(start = 10, interval = 0.5, priority = 1)
     public void updateAnimations() {
         Context<Object> context = ContextUtils.getContext(this);
         if (context == null) {
@@ -44,24 +53,41 @@ public class MigrationReporter {
             return;
         }
 
-        // Aggiorna le animazioni esistenti
-        Iterator<MigrationMarker> iterator = activeAnimations.iterator();
-        while (iterator.hasNext()) {
-            MigrationMarker marker = iterator.next();
+        double currentTick = RunEnvironment.getInstance().getCurrentSchedule().getTickCount();
+        List<MigrationMarker> toRemove = new ArrayList<>();
+        
+        for (MigrationMarker marker : activeAnimations) {
             marker.updateProgress();
-            
             if (marker.isComplete()) {
-                // Rimuovi solo dal contesto
-                context.remove(marker);
-                iterator.remove();
-                
-                System.out.println("Animazione completata per migrazione: " + 
-                    marker.getMigration().origine + " -> " + marker.getMigration().destinazione);
+                toRemove.add(marker);
             }
         }
+        
+
+        for (MigrationMarker marker : toRemove) {
+            try {
+                context.remove(marker);
+                activeAnimations.remove(marker);
+                
+                //System.out.println("MARKER RIMOSSO COMPLETAMENTE al tick " + currentTick + " per migrazione: " + marker.getMigration().origine + " -> " +  marker.getMigration().destinazione);
+            } catch (Exception e) {
+                System.err.println("Errore nella rimozione del marker: " + e.getMessage());
+            }
+        }
+        
+      /*  if (currentTick % 5 == 0) { // Ogni 5 tick per non riempire troppo i log
+            System.out.println("=== STATO ANIMAZIONI al tick " + currentTick + " ===");
+            System.out.println("Animazioni attive: " + activeAnimations.size());
+            for (MigrationMarker marker : activeAnimations) {
+                System.out.println("  - " + marker.getMigration().origine + " -> " + 
+                                 marker.getMigration().destinazione + 
+                                 " (Progress: " + String.format("%.3f", marker.getProgress()) + ")");
+            }
+            System.out.println("=====================================");
+        }*/
     }
 
-    @ScheduledMethod(start = 12, interval = 12, priority = 1) // Creazione nuove animazioni ogni anno
+    @ScheduledMethod(start = 12, interval = 12, priority = 2)
     public void createNewAnimations() {
         Context<Object> context = ContextUtils.getContext(this);
         if (context == null) return;
@@ -69,7 +95,12 @@ public class MigrationReporter {
         Geography<Object> currentGeography = (Geography<Object>) context.getProjection("Geography");
         if (currentGeography == null) return;
 
-        int anno = (int) RunEnvironment.getInstance().getCurrentSchedule().getTickCount() / 12;
+        double currentTick = RunEnvironment.getInstance().getCurrentSchedule().getTickCount();
+        int anno = (int) (currentTick / 12);
+        
+        if (anno == lastProcessedYear)return;
+        lastProcessedYear = anno;
+        
         List<DataManager.MigrationInfo> migrations = DataManager.getMigrationsToVisualize(
             logPath, anno, migrationThreshold);
 
@@ -77,25 +108,25 @@ public class MigrationReporter {
             double percentage = (double) migration.conteggio / agentiPerRegione;
             
             if (percentage >= migrationThreshold) {
-                // Verifica che non esista già un'animazione per questa migrazione
                 boolean alreadyExists = activeAnimations.stream()
                     .anyMatch(m -> m.getMigration().origine.equals(migration.origine) && 
-                                  m.getMigration().destinazione.equals(migration.destinazione));
+                                  m.getMigration().destinazione.equals(migration.destinazione) &&
+                                  m.getMigration().categoria.equals(migration.categoria));
                 
                 if (!alreadyExists) {
                     MigrationMarker marker = new MigrationMarker(migration);
                     context.add(marker);
                     
-                    // Posiziona il marker alla posizione di origine
                     Regione sourceRegion = regioniMap.get(migration.origine);
                     if (sourceRegion != null) {
                         currentGeography.move(marker, sourceRegion.location);
                         activeAnimations.add(marker);
                         
-                        System.out.println("Nuova animazione creata: " + 
-                            migration.origine + " -> " + migration.destinazione + 
-                            " (conteggio: " + migration.conteggio + ")");
+                       // System.out.println("NUOVA ANIMAZIONE CREATA: " + migration.origine + " -> " + migration.destinazione + " (conteggio: " + migration.conteggio + ", percentuale: " + String.format("%.2f%%", percentage * 100) + ")");
                     }
+                } else {
+                    System.out.println("Animazione già esistente per: " + 
+                        migration.origine + " -> " + migration.destinazione);
                 }
             }
         }

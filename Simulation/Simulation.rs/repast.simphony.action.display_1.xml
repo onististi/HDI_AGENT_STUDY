@@ -3,10 +3,6 @@
   <type>GIS 3D</type>
   <styles>
     <entry>
-      <string>simulation.agent.Agent</string>
-      <string>simulation.visualization.AgentStyle</string>
-    </entry>
-    <entry>
       <string>simulation.context.Regione</string>
       <string>repast.simphony.visualization.gis3D.style.EditedMarkStyle</string>
     </entry>

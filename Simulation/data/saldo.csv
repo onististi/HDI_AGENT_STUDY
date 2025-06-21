@@ -1,0 +1,322 @@
+Anno,Regione,Categoria,Entrate_permille,Uscite_permille,Saldo_permille
+1,Trentino-Alto Adige,Lavoratore_Laurea,0.0,0.0,0.0
+1,Trentino-Alto Adige,Pensionato,0.0,0.0,0.0
+1,Trentino-Alto Adige,Lavoratore_Licenza,0.0,0.0,0.0
+1,Trentino-Alto Adige,Studente_Laurea,0.0,0.0,0.0
+1,Trentino-Alto Adige,Studente_Diploma,0.0,0.0,0.0
+1,Trentino-Alto Adige,Lavoratore_Diploma,0.0,0.0,0.0
+1,Trentino-Alto Adige,Studente_Licenza,0.0,0.0,0.0
+1,Trentino-Alto Adige,Disoccupato,0.0,0.0,0.0
+1,Calabria,Lavoratore_Laurea,0.0,0.0,0.0
+1,Calabria,Pensionato,0.0,0.0,0.0
+1,Calabria,Lavoratore_Licenza,0.0,0.0,0.0
+1,Calabria,Studente_Laurea,0.0,0.0,0.0
+1,Calabria,Studente_Diploma,0.0,0.0,0.0
+1,Calabria,Lavoratore_Diploma,0.0,0.0,0.0
+1,Calabria,Studente_Licenza,0.0,0.0,0.0
+1,Calabria,Disoccupato,0.0,0.0,0.0
+1,Veneto,Lavoratore_Laurea,0.0,0.0,0.0
+1,Veneto,Pensionato,0.0,0.0,0.0
+1,Veneto,Lavoratore_Licenza,0.0,0.0,0.0
+1,Veneto,Studente_Laurea,0.0,0.0,0.0
+1,Veneto,Studente_Diploma,0.0,0.0,0.0
+1,Veneto,Lavoratore_Diploma,0.0,0.0,0.0
+1,Veneto,Studente_Licenza,0.0,0.0,0.0
+1,Veneto,Disoccupato,0.0,0.0,0.0
+1,Sardegna,Lavoratore_Laurea,0.0,0.0,0.0
+1,Sardegna,Pensionato,0.0,0.0,0.0
+1,Sardegna,Lavoratore_Licenza,0.0,0.0,0.0
+1,Sardegna,Studente_Laurea,0.0,0.0,0.0
+1,Sardegna,Studente_Diploma,0.0,0.0,0.0
+1,Sardegna,Lavoratore_Diploma,0.0,0.0,0.0
+1,Sardegna,Studente_Licenza,0.0,0.0,0.0
+1,Sardegna,Disoccupato,0.0,0.0,0.0
+1,Molise,Lavoratore_Laurea,0.0,0.0,0.0
+1,Molise,Pensionato,0.0,0.0,0.0
+1,Molise,Lavoratore_Licenza,0.0,0.0,0.0
+1,Molise,Studente_Laurea,0.0,0.0,0.0
+1,Molise,Studente_Diploma,0.0,0.0,0.0
+1,Molise,Lavoratore_Diploma,0.0,0.0,0.0
+1,Molise,Studente_Licenza,0.0,0.0,0.0
+1,Molise,Disoccupato,0.0,0.0,0.0
+1,Campania,Lavoratore_Laurea,0.0,0.0,0.0
+1,Campania,Pensionato,0.0,0.0,0.0
+1,Campania,Lavoratore_Licenza,0.0,0.0,0.0
+1,Campania,Studente_Laurea,0.0,0.0,0.0
+1,Campania,Studente_Diploma,0.0,0.0,0.0
+1,Campania,Lavoratore_Diploma,0.0,0.0,0.0
+1,Campania,Studente_Licenza,0.0,0.0,0.0
+1,Campania,Disoccupato,0.0,0.0,0.0
+1,Abruzzo,Lavoratore_Laurea,0.0,0.0,0.0
+1,Abruzzo,Pensionato,0.0,0.0,0.0
+1,Abruzzo,Lavoratore_Licenza,0.0,0.0,0.0
+1,Abruzzo,Studente_Laurea,0.0,0.0,0.0
+1,Abruzzo,Studente_Diploma,0.0,0.0,0.0
+1,Abruzzo,Lavoratore_Diploma,0.0,0.0,0.0
+1,Abruzzo,Studente_Licenza,0.0,0.0,0.0
+1,Abruzzo,Disoccupato,0.0,0.0,0.0
+1,Puglia,Lavoratore_Laurea,0.0,0.0,0.0
+1,Puglia,Pensionato,0.0,0.0,0.0
+1,Puglia,Lavoratore_Licenza,0.0,0.0,0.0
+1,Puglia,Studente_Laurea,0.0,0.0,0.0
+1,Puglia,Studente_Diploma,0.0,0.0,0.0
+1,Puglia,Lavoratore_Diploma,0.0,0.0,0.0
+1,Puglia,Studente_Licenza,0.0,0.0,0.0
+1,Puglia,Disoccupato,0.0,0.0,0.0
+1,Piemonte,Lavoratore_Laurea,0.0,0.0,0.0
+1,Piemonte,Pensionato,0.0,0.0,0.0
+1,Piemonte,Lavoratore_Licenza,0.0,0.0,0.0
+1,Piemonte,Studente_Laurea,0.0,0.0,0.0
+1,Piemonte,Studente_Diploma,0.0,0.0,0.0
+1,Piemonte,Lavoratore_Diploma,0.0,0.0,0.0
+1,Piemonte,Studente_Licenza,0.0,0.0,0.0
+1,Piemonte,Disoccupato,0.0,0.0,0.0
+1,Basilicata,Lavoratore_Laurea,0.0,0.0,0.0
+1,Basilicata,Pensionato,0.0,0.0,0.0
+1,Basilicata,Lavoratore_Licenza,0.0,0.0,0.0
+1,Basilicata,Studente_Laurea,0.0,0.0,0.0
+1,Basilicata,Studente_Diploma,0.0,0.0,0.0
+1,Basilicata,Lavoratore_Diploma,0.0,0.0,0.0
+1,Basilicata,Studente_Licenza,0.0,0.0,0.0
+1,Basilicata,Disoccupato,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Lavoratore_Laurea,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Pensionato,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Lavoratore_Licenza,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Studente_Laurea,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Studente_Diploma,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Lavoratore_Diploma,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Studente_Licenza,0.0,0.0,0.0
+1,Friuli-Venezia Giulia,Disoccupato,0.0,0.0,0.0
+1,Toscana,Lavoratore_Laurea,0.0,0.0,0.0
+1,Toscana,Pensionato,0.0,0.0,0.0
+1,Toscana,Lavoratore_Licenza,0.0,0.0,0.0
+1,Toscana,Studente_Laurea,0.0,0.0,0.0
+1,Toscana,Studente_Diploma,0.0,0.0,0.0
+1,Toscana,Lavoratore_Diploma,0.0,0.0,0.0
+1,Toscana,Studente_Licenza,0.0,0.0,0.0
+1,Toscana,Disoccupato,0.0,0.0,0.0
+1,Lombardia,Lavoratore_Laurea,0.0,0.0,0.0
+1,Lombardia,Pensionato,0.0,0.0,0.0
+1,Lombardia,Lavoratore_Licenza,0.0,0.0,0.0
+1,Lombardia,Studente_Laurea,0.0,0.0,0.0
+1,Lombardia,Studente_Diploma,0.0,0.0,0.0
+1,Lombardia,Lavoratore_Diploma,0.0,0.0,0.0
+1,Lombardia,Studente_Licenza,0.0,0.0,0.0
+1,Lombardia,Disoccupato,0.0,0.0,0.0
+1,Marche,Lavoratore_Laurea,0.0,0.0,0.0
+1,Marche,Pensionato,0.0,0.0,0.0
+1,Marche,Lavoratore_Licenza,0.0,0.0,0.0
+1,Marche,Studente_Laurea,0.0,0.0,0.0
+1,Marche,Studente_Diploma,0.0,0.0,0.0
+1,Marche,Lavoratore_Diploma,0.0,0.0,0.0
+1,Marche,Studente_Licenza,0.0,0.0,0.0
+1,Marche,Disoccupato,0.0,0.0,0.0
+1,Liguria,Lavoratore_Laurea,0.0,0.0,0.0
+1,Liguria,Pensionato,0.0,0.0,0.0
+1,Liguria,Lavoratore_Licenza,0.0,0.0,0.0
+1,Liguria,Studente_Laurea,0.0,0.0,0.0
+1,Liguria,Studente_Diploma,0.0,0.0,0.0
+1,Liguria,Lavoratore_Diploma,0.0,0.0,0.0
+1,Liguria,Studente_Licenza,0.0,0.0,0.0
+1,Liguria,Disoccupato,0.0,0.0,0.0
+1,Lazio,Lavoratore_Laurea,0.0,0.0,0.0
+1,Lazio,Pensionato,0.0,0.0,0.0
+1,Lazio,Lavoratore_Licenza,0.0,0.0,0.0
+1,Lazio,Studente_Laurea,0.0,0.0,0.0
+1,Lazio,Studente_Diploma,0.0,0.0,0.0
+1,Lazio,Lavoratore_Diploma,0.0,0.0,0.0
+1,Lazio,Studente_Licenza,0.0,0.0,0.0
+1,Lazio,Disoccupato,0.0,0.0,0.0
+1,Umbria,Lavoratore_Laurea,0.0,0.0,0.0
+1,Umbria,Pensionato,0.0,0.0,0.0
+1,Umbria,Lavoratore_Licenza,0.0,0.0,0.0
+1,Umbria,Studente_Laurea,0.0,0.0,0.0
+1,Umbria,Studente_Diploma,0.0,0.0,0.0
+1,Umbria,Lavoratore_Diploma,0.0,0.0,0.0
+1,Umbria,Studente_Licenza,0.0,0.0,0.0
+1,Umbria,Disoccupato,0.0,0.0,0.0
+1,Valle d'Aosta,Lavoratore_Laurea,0.0,0.0,0.0
+1,Valle d'Aosta,Pensionato,0.0,0.0,0.0
+1,Valle d'Aosta,Lavoratore_Licenza,0.0,0.0,0.0
+1,Valle d'Aosta,Studente_Laurea,0.0,0.0,0.0
+1,Valle d'Aosta,Studente_Diploma,0.0,0.0,0.0
+1,Valle d'Aosta,Lavoratore_Diploma,0.0,0.0,0.0
+1,Valle d'Aosta,Studente_Licenza,0.0,0.0,0.0
+1,Valle d'Aosta,Disoccupato,0.0,0.0,0.0
+1,Emilia-Romagna,Lavoratore_Laurea,0.0,0.0,0.0
+1,Emilia-Romagna,Pensionato,0.0,0.0,0.0
+1,Emilia-Romagna,Lavoratore_Licenza,0.0,0.0,0.0
+1,Emilia-Romagna,Studente_Laurea,0.0,0.0,0.0
+1,Emilia-Romagna,Studente_Diploma,0.0,0.0,0.0
+1,Emilia-Romagna,Lavoratore_Diploma,0.0,0.0,0.0
+1,Emilia-Romagna,Studente_Licenza,0.0,0.0,0.0
+1,Emilia-Romagna,Disoccupato,0.0,0.0,0.0
+1,Sicilia,Lavoratore_Laurea,0.0,0.0,0.0
+1,Sicilia,Pensionato,0.0,0.0,0.0
+1,Sicilia,Lavoratore_Licenza,0.0,0.0,0.0
+1,Sicilia,Studente_Laurea,0.0,0.0,0.0
+1,Sicilia,Studente_Diploma,0.0,0.0,0.0
+1,Sicilia,Lavoratore_Diploma,0.0,0.0,0.0
+1,Sicilia,Studente_Licenza,0.0,0.0,0.0
+1,Sicilia,Disoccupato,0.0,0.0,0.0
+FINALE,TOTALE_SIMULAZIONE,---,---,---,---
+FINALE,Trentino-Alto Adige,Lavoratore_Laurea,400.0,0.0,400.0
+FINALE,Trentino-Alto Adige,Pensionato,0.0,0.0,0.0
+FINALE,Trentino-Alto Adige,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Trentino-Alto Adige,Studente_Laurea,0.0,0.0,0.0
+FINALE,Trentino-Alto Adige,Studente_Diploma,0.0,0.0,0.0
+FINALE,Trentino-Alto Adige,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Trentino-Alto Adige,Studente_Licenza,0.0,0.0,0.0
+FINALE,Trentino-Alto Adige,Disoccupato,0.0,0.0,0.0
+FINALE,Calabria,Lavoratore_Laurea,0.0,0.0,0.0
+FINALE,Calabria,Pensionato,0.0,0.0,0.0
+FINALE,Calabria,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Calabria,Studente_Laurea,0.0,0.0,0.0
+FINALE,Calabria,Studente_Diploma,0.0,0.0,0.0
+FINALE,Calabria,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Calabria,Studente_Licenza,0.0,0.0,0.0
+FINALE,Calabria,Disoccupato,0.0,0.0,0.0
+FINALE,Veneto,Lavoratore_Laurea,0.0,0.0,0.0
+FINALE,Veneto,Pensionato,0.0,0.0,0.0
+FINALE,Veneto,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Veneto,Studente_Laurea,0.0,0.0,0.0
+FINALE,Veneto,Studente_Diploma,0.0,0.0,0.0
+FINALE,Veneto,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Veneto,Studente_Licenza,0.0,0.0,0.0
+FINALE,Veneto,Disoccupato,0.0,0.0,0.0
+FINALE,Sardegna,Lavoratore_Laurea,0.0,400.0,-400.0
+FINALE,Sardegna,Pensionato,0.0,0.0,0.0
+FINALE,Sardegna,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Sardegna,Studente_Laurea,0.0,0.0,0.0
+FINALE,Sardegna,Studente_Diploma,0.0,0.0,0.0
+FINALE,Sardegna,Lavoratore_Diploma,0.0,133.3,-133.3
+FINALE,Sardegna,Studente_Licenza,0.0,0.0,0.0
+FINALE,Sardegna,Disoccupato,0.0,0.0,0.0
+FINALE,Molise,Lavoratore_Laurea,0.0,400.0,-400.0
+FINALE,Molise,Pensionato,0.0,0.0,0.0
+FINALE,Molise,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Molise,Studente_Laurea,0.0,0.0,0.0
+FINALE,Molise,Studente_Diploma,0.0,0.0,0.0
+FINALE,Molise,Lavoratore_Diploma,0.0,266.7,-266.7
+FINALE,Molise,Studente_Licenza,0.0,0.0,0.0
+FINALE,Molise,Disoccupato,0.0,0.0,0.0
+FINALE,Campania,Lavoratore_Laurea,0.0,400.0,-400.0
+FINALE,Campania,Pensionato,0.0,0.0,0.0
+FINALE,Campania,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Campania,Studente_Laurea,0.0,0.0,0.0
+FINALE,Campania,Studente_Diploma,0.0,0.0,0.0
+FINALE,Campania,Lavoratore_Diploma,0.0,533.3,-533.3
+FINALE,Campania,Studente_Licenza,0.0,0.0,0.0
+FINALE,Campania,Disoccupato,0.0,0.0,0.0
+FINALE,Abruzzo,Lavoratore_Laurea,0.0,400.0,-400.0
+FINALE,Abruzzo,Pensionato,0.0,0.0,0.0
+FINALE,Abruzzo,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Abruzzo,Studente_Laurea,0.0,0.0,0.0
+FINALE,Abruzzo,Studente_Diploma,0.0,0.0,0.0
+FINALE,Abruzzo,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Abruzzo,Studente_Licenza,0.0,0.0,0.0
+FINALE,Abruzzo,Disoccupato,0.0,0.0,0.0
+FINALE,Puglia,Lavoratore_Laurea,0.0,0.0,0.0
+FINALE,Puglia,Pensionato,0.0,0.0,0.0
+FINALE,Puglia,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Puglia,Studente_Laurea,0.0,0.0,0.0
+FINALE,Puglia,Studente_Diploma,0.0,0.0,0.0
+FINALE,Puglia,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Puglia,Studente_Licenza,0.0,0.0,0.0
+FINALE,Puglia,Disoccupato,0.0,0.0,0.0
+FINALE,Piemonte,Lavoratore_Laurea,133.3,0.0,133.3
+FINALE,Piemonte,Pensionato,0.0,0.0,0.0
+FINALE,Piemonte,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Piemonte,Studente_Laurea,0.0,0.0,0.0
+FINALE,Piemonte,Studente_Diploma,0.0,0.0,0.0
+FINALE,Piemonte,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Piemonte,Studente_Licenza,0.0,0.0,0.0
+FINALE,Piemonte,Disoccupato,0.0,0.0,0.0
+FINALE,Basilicata,Lavoratore_Laurea,0.0,133.3,-133.3
+FINALE,Basilicata,Pensionato,0.0,0.0,0.0
+FINALE,Basilicata,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Basilicata,Studente_Laurea,0.0,0.0,0.0
+FINALE,Basilicata,Studente_Diploma,0.0,0.0,0.0
+FINALE,Basilicata,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Basilicata,Studente_Licenza,0.0,0.0,0.0
+FINALE,Basilicata,Disoccupato,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Lavoratore_Laurea,133.3,0.0,133.3
+FINALE,Friuli-Venezia Giulia,Pensionato,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Studente_Laurea,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Studente_Diploma,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Studente_Licenza,0.0,0.0,0.0
+FINALE,Friuli-Venezia Giulia,Disoccupato,0.0,0.0,0.0
+FINALE,Toscana,Lavoratore_Laurea,0.0,133.3,-133.3
+FINALE,Toscana,Pensionato,0.0,0.0,0.0
+FINALE,Toscana,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Toscana,Studente_Laurea,0.0,0.0,0.0
+FINALE,Toscana,Studente_Diploma,0.0,0.0,0.0
+FINALE,Toscana,Lavoratore_Diploma,133.3,0.0,133.3
+FINALE,Toscana,Studente_Licenza,0.0,0.0,0.0
+FINALE,Toscana,Disoccupato,0.0,0.0,0.0
+FINALE,Lombardia,Lavoratore_Laurea,800.0,0.0,800.0
+FINALE,Lombardia,Pensionato,0.0,0.0,0.0
+FINALE,Lombardia,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Lombardia,Studente_Laurea,0.0,0.0,0.0
+FINALE,Lombardia,Studente_Diploma,0.0,0.0,0.0
+FINALE,Lombardia,Lavoratore_Diploma,133.3,0.0,133.3
+FINALE,Lombardia,Studente_Licenza,0.0,0.0,0.0
+FINALE,Lombardia,Disoccupato,0.0,0.0,0.0
+FINALE,Marche,Lavoratore_Laurea,0.0,0.0,0.0
+FINALE,Marche,Pensionato,0.0,0.0,0.0
+FINALE,Marche,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Marche,Studente_Laurea,0.0,0.0,0.0
+FINALE,Marche,Studente_Diploma,0.0,0.0,0.0
+FINALE,Marche,Lavoratore_Diploma,133.3,0.0,133.3
+FINALE,Marche,Studente_Licenza,0.0,0.0,0.0
+FINALE,Marche,Disoccupato,0.0,0.0,0.0
+FINALE,Liguria,Lavoratore_Laurea,0.0,0.0,0.0
+FINALE,Liguria,Pensionato,0.0,0.0,0.0
+FINALE,Liguria,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Liguria,Studente_Laurea,0.0,0.0,0.0
+FINALE,Liguria,Studente_Diploma,0.0,0.0,0.0
+FINALE,Liguria,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Liguria,Studente_Licenza,0.0,0.0,0.0
+FINALE,Liguria,Disoccupato,0.0,0.0,0.0
+FINALE,Lazio,Lavoratore_Laurea,666.7,0.0,666.7
+FINALE,Lazio,Pensionato,0.0,0.0,0.0
+FINALE,Lazio,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Lazio,Studente_Laurea,0.0,0.0,0.0
+FINALE,Lazio,Studente_Diploma,0.0,0.0,0.0
+FINALE,Lazio,Lavoratore_Diploma,400.0,0.0,400.0
+FINALE,Lazio,Studente_Licenza,0.0,0.0,0.0
+FINALE,Lazio,Disoccupato,0.0,0.0,0.0
+FINALE,Umbria,Lavoratore_Laurea,0.0,266.7,-266.7
+FINALE,Umbria,Pensionato,0.0,0.0,0.0
+FINALE,Umbria,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Umbria,Studente_Laurea,0.0,0.0,0.0
+FINALE,Umbria,Studente_Diploma,0.0,0.0,0.0
+FINALE,Umbria,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Umbria,Studente_Licenza,0.0,0.0,0.0
+FINALE,Umbria,Disoccupato,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Lavoratore_Laurea,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Pensionato,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Studente_Laurea,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Studente_Diploma,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Studente_Licenza,0.0,0.0,0.0
+FINALE,Valle d'Aosta,Disoccupato,0.0,0.0,0.0
+FINALE,Emilia-Romagna,Lavoratore_Laurea,133.3,0.0,133.3
+FINALE,Emilia-Romagna,Pensionato,0.0,0.0,0.0
+FINALE,Emilia-Romagna,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Emilia-Romagna,Studente_Laurea,0.0,0.0,0.0
+FINALE,Emilia-Romagna,Studente_Diploma,0.0,0.0,0.0
+FINALE,Emilia-Romagna,Lavoratore_Diploma,133.3,0.0,133.3
+FINALE,Emilia-Romagna,Studente_Licenza,0.0,0.0,0.0
+FINALE,Emilia-Romagna,Disoccupato,0.0,0.0,0.0
+FINALE,Sicilia,Lavoratore_Laurea,0.0,133.3,-133.3
+FINALE,Sicilia,Pensionato,0.0,0.0,0.0
+FINALE,Sicilia,Lavoratore_Licenza,0.0,0.0,0.0
+FINALE,Sicilia,Studente_Laurea,0.0,0.0,0.0
+FINALE,Sicilia,Studente_Diploma,0.0,0.0,0.0
+FINALE,Sicilia,Lavoratore_Diploma,0.0,0.0,0.0
+FINALE,Sicilia,Studente_Licenza,0.0,0.0,0.0
+FINALE,Sicilia,Disoccupato,0.0,0.0,0.0

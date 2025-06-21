@@ -1,25 +1,20 @@
 package simulation.visualization;
 
 import gov.nasa.worldwind.WorldWind;
-import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.BasicWWTexture;
 import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.render.WWTexture;
-import repast.simphony.context.Context;
-import repast.simphony.space.gis.Geography;
-import repast.simphony.util.ContextUtils;
 import repast.simphony.visualization.gis3D.PlaceMark;
 import repast.simphony.visualization.gis3D.style.MarkStyle;
-import simulation.context.Regione;
 import simulation.utils.DataManager.MigrationInfo;
-
+import java.awt.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.StreamSupport;
 
 public class MigrationAnimation implements MarkStyle<MigrationMarker> {
-    private Map<String, WWTexture> textureMap;
+    private final Map<String, WWTexture> textureMap;
+    private WWTexture defaultTexture;
 
     public MigrationAnimation() {
         this.textureMap = new HashMap<>();
@@ -31,14 +26,28 @@ public class MigrationAnimation implements MarkStyle<MigrationMarker> {
         loadTexture("disoccupato_diploma", "icons/disoccupato_diploma.png");
         loadTexture("lavoratore_laurea", "icons/lavoratore_laurea.png");
         loadTexture("lavoratore_diploma", "icons/lavoratore_diploma.png");
+
+        createDefaultTexture();
     }
 
     private void loadTexture(String key, String filePath) {
-        URL localUrl = WorldWind.getDataFileStore().requestFile(filePath);
-        if (localUrl != null) {
-            textureMap.put(key, new BasicWWTexture(localUrl, false));
-        } else {
-            System.err.println("Error: Unable to load texture for " + key + " from " + filePath);
+        try {
+            URL localUrl = WorldWind.getDataFileStore().requestFile(filePath);
+            if (localUrl != null) {
+                textureMap.put(key, new BasicWWTexture(localUrl, false));
+            } else {
+                System.err.println("Errore: Impossibile caricare la texture per " + key + " da " + filePath);
+            }
+        } catch (Exception e) {
+            System.err.println("Errore nel caricamento della texture " + key + ": " + e.getMessage());
+        }
+    }
+
+    private void createDefaultTexture() {
+        try {
+            defaultTexture = new BasicWWTexture(Color.RED, false);
+        } catch (Exception e) {
+            System.err.println("Errore nella creazione della texture di default: " + e.getMessage());
         }
     }
 
@@ -51,57 +60,24 @@ public class MigrationAnimation implements MarkStyle<MigrationMarker> {
         mark.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
         mark.setLineEnabled(false);
 
-        MigrationInfo migration = obj.getMigration();
-        Context<Object> context = ContextUtils.getContext(obj);
-        if (context == null) return mark;
-
-        Geography<Object> geography = (Geography<Object>) context.getProjection("Geography");
-        if (geography == null) return mark;
-
-        // Trova le regioni di origine e destinazione
-        Regione source = StreamSupport.stream(context.getObjects(Regione.class).spliterator(), false)
-            .map(o -> (Regione) o)
-            .filter(r -> r.getNome().equals(migration.origine))
-            .findFirst()
-            .orElse(null);
-
-        Regione dest = StreamSupport.stream(context.getObjects(Regione.class).spliterator(), false)
-            .map(o -> (Regione) o)
-            .filter(r -> r.getNome().equals(migration.destinazione))
-            .findFirst()
-            .orElse(null);
-
-        if (source == null || dest == null) {
-            return mark;
-        }
-
-        // Calcola la posizione corrente basata sul progresso
-        double sourceLat = source.coordinate.y;
-        double sourceLon = source.coordinate.x;
-        double destLat = dest.coordinate.y;
-        double destLon = dest.coordinate.x;
-
-        double progress = obj.getProgress();
-        
-        // Interpolazione fluida della posizione
-        double currentLat = sourceLat + (destLat - sourceLat) * progress;
-        double currentLon = sourceLon + (destLon - sourceLon) * progress;
-        
-        // Aggiungi una leggera elevazione per visibilità
-        double elevation = 1000 + (Math.sin(progress * Math.PI) * 2000);
-
-        mark.setPosition(Position.fromDegrees(currentLat, currentLon, elevation));
-
+        // posizione già aggiornata dal marker con Geography.move()
         return mark;
     }
 
     @Override
     public WWTexture getTexture(MigrationMarker obj, WWTexture currentTexture) {
         MigrationInfo migration = obj.getMigration();
-        return textureMap.getOrDefault(
-            migration.categoria.toLowerCase(),
-            textureMap.get("disoccupato_diploma")
-        );
+        String category = migration.categoria != null ? migration.categoria.toLowerCase() : "default";
+
+        WWTexture texture = textureMap.get(category);
+        if (texture == null) {
+            texture = textureMap.get("disoccupato_diploma");
+        }
+        if (texture == null) {
+            texture = defaultTexture;
+        }
+
+        return texture;
     }
 
     @Override
@@ -111,24 +87,13 @@ public class MigrationAnimation implements MarkStyle<MigrationMarker> {
 
     @Override
     public double getElevation(MigrationMarker obj) {
-        return 0; // L'elevazione è già gestita in getPlaceMark
+        double progress = obj.getProgress();
+        return 2000 + (Math.sin(progress * Math.PI) * 15000);
     }
 
     @Override
-    public double getScale(MigrationMarker obj) {
-        // Scala dinamica basata sul progresso per effetto fade-in/fade-out
-        double progress = obj.getProgress();
-        double scale = 0.05;
-        
-        if (progress < 0.1) {
-            // Fade-in all'inizio
-            scale *= (progress / 0.1);
-        } else if (progress > 0.9) {
-            // Fade-out alla fine
-            scale *= ((1.0 - progress) / 0.1);
-        }
-        
-        return Math.max(scale, 0.01); // Scala minima per visibilità
+    public double getScale(MigrationMarker obj) { 
+        return 0.05;
     }
 
     @Override
@@ -138,22 +103,24 @@ public class MigrationAnimation implements MarkStyle<MigrationMarker> {
 
     @Override
     public String getLabel(MigrationMarker obj) {
-        return null;
+        MigrationInfo migration = obj.getMigration();
+        return migration.origine.substring(0, Math.min(3, migration.origine.length())) + "→" +
+               migration.destinazione.substring(0, Math.min(3, migration.destinazione.length()));
     }
 
     @Override
-    public java.awt.Color getLabelColor(MigrationMarker obj) {
-        return null;
+    public Color getLabelColor(MigrationMarker obj) {
+        return Color.WHITE;
     }
 
     @Override
-    public java.awt.Font getLabelFont(MigrationMarker obj) {
-        return null;
+    public Font getLabelFont(MigrationMarker obj) {
+        return new Font("Arial", Font.BOLD, 12);
     }
 
     @Override
     public Offset getLabelOffset(MigrationMarker obj) {
-        return null;
+        return Offset.fromFraction(0.5, -0.2);
     }
 
     @Override
@@ -162,7 +129,7 @@ public class MigrationAnimation implements MarkStyle<MigrationMarker> {
     }
 
     @Override
-    public gov.nasa.worldwind.render.Material getLineMaterial(MigrationMarker obj, 
+    public gov.nasa.worldwind.render.Material getLineMaterial(MigrationMarker obj,
             gov.nasa.worldwind.render.Material lineMaterial) {
         return null;
     }

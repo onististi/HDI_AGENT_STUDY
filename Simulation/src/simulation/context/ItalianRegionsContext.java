@@ -21,6 +21,10 @@ import repast.simphony.context.space.gis.GeographyFactoryFinder;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+
+import gov.nasa.worldwind.WorldWindow;
+
+import java.io.IOException;
 import java.util.*;
 
 public class ItalianRegionsContext implements ContextBuilder<Object> {
@@ -62,16 +66,43 @@ public class ItalianRegionsContext implements ContextBuilder<Object> {
                 context.add(p);
             }
         }
+        /*
+         * <?xml version="1.0" encoding="UTF-8"?>
+<parameters>
+    <parameter name="randomSeed" type="int" defaultValue="0" displayName="Default Random Seed"/>
+    
+    <parameter name="dataset" type="string" defaultValue="regioni_istat.csv" displayName="Dataset da utilizzare" inputType="select">
+        <choice value="regioni_istat.csv" displayValue="Regioni ISTAT"/>
+        <choice value="divario_ampliato.csv" displayValue="Divario Ampliato"/>
+    </parameter>
+    
+    <parameter name="agentiPerRegione" type="int" defaultValue="60" displayName="Agenti per regione" inputType="select">
+        <choice value="60" displayValue="60 (veloce)"/>
+        <choice value="120" displayValue="120 (bilanciato)"/>
+        <choice value="300" displayValue="300 (precisa)"/>
+        <choice value="500" displayValue="500 (molto precisa)"/>
+    </parameter>
+    
+    <parameter name="migrationThreshold" type="double" defaultValue="0.1" displayName="Soglia di migrazione" inputType="select">
+        <choice value="0.1" displayValue="10%"/>
+        <choice value="0.05" displayValue="5%"/>
+        <choice value="0.2" displayValue="20%"/>
+    </parameter>
+</parameters>*/
 
         MigrationReporter reporter = new MigrationReporter(regioniMap, "data/log.csv", agentiPerRegione, 0, geography, activeAnimations);
         context.add(reporter);
 
         RunEnvironment.getInstance().addRunListener(new RunListener() {
-            @Override
-            public void stopped() {
-                System.out.println("Simulazione terminata. Calcolo del saldo migratorio finale...");
-               // DataManager.stampaSaldoMigratorioFinale("data/log.csv", regioniMap);
-            }
+        	@Override
+        	public void stopped() {
+        	    System.out.println("Simulazione terminata. Calcolo del saldo migratorio finale...");
+        	    try {
+					DataManager.stampaSaldoFinale("data/log.csv", regioniMap, agentiPerRegione);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+        	}
 
             @Override
             public void paused() {}
@@ -83,7 +114,7 @@ public class ItalianRegionsContext implements ContextBuilder<Object> {
             public void restarted() {}
         });
 
-        RunEnvironment.getInstance().endAt(24);
+        RunEnvironment.getInstance().endAt(23);
         return context;
     }
 }

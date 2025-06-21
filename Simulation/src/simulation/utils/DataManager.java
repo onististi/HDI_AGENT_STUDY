@@ -11,11 +11,10 @@ import org.locationtech.jts.geom.Coordinate;
 
 public class DataManager {
 
-    public static void inizializzaLog(String path) {
+    public static void inizializzaLog(String path) { //header, crea se non c'è
         String header = "id_agente,categoria,origine,destinazione,famiglia,anni_stab,attrattivita,soglia,eta,emigrato,gravity,pp,uty T,anno";
         try {
-            Files.writeString(Paths.get(path), header + "\n", StandardCharsets.UTF_8,
-                              StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.writeString(Paths.get(path), header + "\n", StandardCharsets.UTF_8,StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,14 +45,6 @@ public class DataManager {
         return regioni;
     }
 
-    public static void salvaMigrazione(String path, List<String> righe) {
-        try {
-            Files.write(Paths.get(path), righe, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void appendToCSV(String path, List<String> righe, int anno) {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path), StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
@@ -66,19 +57,32 @@ public class DataManager {
         }
     }
 
-    public static void calcolaSaldoAnnuale(String logPath, String outputPath) {
+    private static Map<String, Map<String, Integer>>[] calcolaSaldi(String logPath, Map<String, Regione> regioni, Integer annoFiltro) {
         Map<String, Map<String, Integer>> entrate = new HashMap<>();
         Map<String, Map<String, Integer>> uscite = new HashMap<>();
-        Map<String, Integer> saldoTotaleRegione = new HashMap<>();
-        int saldoTotaleItalia = 0;
+        String[] categorie = {"Lavoratore_Laurea", "Lavoratore_Diploma", "Lavoratore_Licenza",
+                             "Studente_Laurea", "Studente_Diploma", "Studente_Licenza",
+                             "Disoccupato", "Pensionato"};
+
+        // Initialize maps for all regions and categories
+        for (String nomeRegione : regioni.keySet()) {
+            entrate.put(nomeRegione, new HashMap<>());
+            uscite.put(nomeRegione, new HashMap<>());
+            for (String cat : categorie) {
+                entrate.get(nomeRegione).put(cat, 0);
+                uscite.get(nomeRegione).put(cat, 0);
+            }
+        }
 
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(logPath), StandardCharsets.UTF_8)) {
-            String header = reader.readLine();
+            reader.readLine(); // Skip header
             String line;
-
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
                 if (tokens.length < 14) continue;
+
+                int annoLog = Integer.parseInt(tokens[13]);
+                if (annoFiltro != null && annoLog != annoFiltro) continue;
 
                 String categoria = tokens[1];
                 String origine = tokens[2];
@@ -87,170 +91,20 @@ public class DataManager {
 
                 if (!emigrato) continue;
 
-                uscite.putIfAbsent(origine, new HashMap<>());
-                uscite.get(origine).merge(categoria, 1, Integer::sum);
-                saldoTotaleRegione.merge(origine, -1, Integer::sum);
-
-                entrate.putIfAbsent(destinazione, new HashMap<>());
-                entrate.get(destinazione).merge(categoria, 1, Integer::sum);
-                saldoTotaleRegione.merge(destinazione, 1, Integer::sum);
-
-                saldoTotaleItalia++;
-            }
-
-            List<String> righe = new ArrayList<>();
-            righe.add("Regione,Categoria,Entrate,Uscite,Saldo,Saldo_Regionale");
-
-            Set<String> tutteRegioni = new HashSet<>();
-            tutteRegioni.addAll(entrate.keySet());
-            tutteRegioni.addAll(uscite.keySet());
-
-            for (String regione : tutteRegioni) {
-                Set<String> tutteCategorie = new HashSet<>();
-                if (entrate.containsKey(regione)) tutteCategorie.addAll(entrate.get(regione).keySet());
-                if (uscite.containsKey(regione)) tutteCategorie.addAll(uscite.get(regione).keySet());
-
-                for (String cat : tutteCategorie) {
-                    int in_ = entrate.getOrDefault(regione, Map.of()).getOrDefault(cat, 0);
-                    int out = uscite.getOrDefault(regione, Map.of()).getOrDefault(cat, 0);
-                    int saldo = in_ - out;
-                    int saldoReg = saldoTotaleRegione.getOrDefault(regione, 0);
-                    righe.add(String.format(Locale.US, "%s,%s,%d,%d,%d,%d", regione, cat, in_, out, saldo, saldoReg));
+                if (uscite.containsKey(origine) && uscite.get(origine).containsKey(categoria)) {
+                    uscite.get(origine).merge(categoria, 1, Integer::sum);
+                }
+                if (entrate.containsKey(destinazione) && entrate.get(destinazione).containsKey(categoria)) {
+                    entrate.get(destinazione).merge(categoria, 1, Integer::sum);
                 }
             }
-
-            righe.add(String.format(Locale.US, "Totale,,,,%d,", saldoTotaleItalia));
-
-            Files.write(Paths.get(outputPath), righe, StandardCharsets.UTF_8,
-                        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Errore nella lettura del log: " + e.getMessage());
         }
+
+        return new Map[]{entrate, uscite};
     }
 
-    public static void stampaSaldoMigratorioConsole(String logPath, Map<String, Regione> regioni, int annoCorrente) throws IOException {
-        Map<String, Integer> entrate = new HashMap<>();
-        Map<String, Integer> uscite = new HashMap<>();
-        Map<String, Double> popolazioneOriginale = new HashMap<>();
-
-        for (Regione r : regioni.values()) {
-            popolazioneOriginale.put(r.nome, r.popolazione * 10);
-            entrate.put(r.nome, 0);
-            uscite.put(r.nome, 0);
-        }
-
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(logPath), StandardCharsets.UTF_8)) {
-            String header = reader.readLine();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split(",");
-                if (tokens.length < 14) continue;
-
-                int annoLog = Integer.parseInt(tokens[13]);
-                if (annoLog != (annoCorrente / 12)) continue;
-
-                String origine = tokens[2];
-                String destinazione = tokens[3];
-                boolean emigrato = Boolean.parseBoolean(tokens[9]);
-
-                if (!emigrato) continue;
-
-                uscite.merge(origine, 1, Integer::sum);
-                entrate.merge(destinazione, 1, Integer::sum);
-            }
-
-            List<RegioneSaldo> risultati = new ArrayList<>();
-
-            for (String nomeRegione : regioni.keySet()) {
-                int in = entrate.getOrDefault(nomeRegione, 0);
-                int out = uscite.getOrDefault(nomeRegione, 0);
-                double popOriginale = popolazioneOriginale.get(nomeRegione);
-
-                double percEntrate = (in / popOriginale) * 100;
-                double percUscite = (out / popOriginale) * 100;
-                double saldo = percEntrate - percUscite;
-
-                risultati.add(new RegioneSaldo(nomeRegione, percEntrate, percUscite, saldo));
-            }
-
-            risultati.sort((a, b) -> Double.compare(b.saldo, a.saldo));
-
-            System.out.println("\n" + "=".repeat(80));
-            System.out.println("📊 SALDO MIGRATORIO ANNO " + (annoCorrente / 12 + 1) + " (% sulla popolazione iniziale)");
-            System.out.println("=".repeat(80));
-
-            for (RegioneSaldo r : risultati) {
-                String icona = r.saldo > 0 ? "🟢" : (r.saldo < 0 ? "🔴" : "🟡");
-                System.out.printf("%s %s: +%.2f%% guadagnati, -%.2f%% persi → saldo %.2f%%\n",
-                        icona, r.nome, r.percEntrate, r.percUscite, r.saldo);
-            }
-            System.out.println("=".repeat(80) + "\n");
-        }
-    }
-
-    public static void stampaSaldoMigratorioFinale(String logPath, Map<String, Regione> regioni) {
-        Map<String, Integer> entrate = new HashMap<>();
-        Map<String, Integer> uscite = new HashMap<>();
-        Map<String, Double> popolazioneOriginale = new HashMap<>();
-
-        for (Regione r : regioni.values()) {
-            popolazioneOriginale.put(r.nome, r.popolazione * 10);
-            entrate.put(r.nome, 0);
-            uscite.put(r.nome, 0);
-        }
-
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(logPath), StandardCharsets.UTF_8)) {
-            String header = reader.readLine();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split(",");
-                if (tokens.length < 14) continue;
-
-                String origine = tokens[2];
-                String destinazione = tokens[3];
-                boolean emigrato = Boolean.parseBoolean(tokens[9]);
-
-                if (!emigrato) continue;
-
-                uscite.merge(origine, 1, Integer::sum);
-                entrate.merge(destinazione, 1, Integer::sum);
-            }
-
-            List<RegioneSaldo> risultati = new ArrayList<>();
-
-            for (String nomeRegione : regioni.keySet()) {
-                int in = entrate.getOrDefault(nomeRegione, 0);
-                int out = uscite.getOrDefault(nomeRegione, 0);
-                double popOriginale = popolazioneOriginale.get(nomeRegione);
-
-                double percEntrate = (in / popOriginale) * 100;
-                double percUscite = (out / popOriginale) * 100;
-                double saldo = percEntrate - percUscite;
-
-                risultati.add(new RegioneSaldo(nomeRegione, percEntrate, percUscite, saldo));
-            }
-
-            risultati.sort((a, b) -> Double.compare(b.saldo, a.saldo));
-
-            System.out.println("\n" + "=".repeat(80));
-            System.out.println("🏆 SALDO MIGRATORIO FINALE - 10 ANNI (% sulla popolazione iniziale)");
-            System.out.println("=".repeat(80));
-
-            for (RegioneSaldo r : risultati) {
-                String icona = r.saldo > 0 ? "🟢" : (r.saldo < 0 ? "🔴" : "🟡");
-                System.out.printf("%s %s: +%.2f%% guadagnati, -%.2f%% persi → saldo %.2f%%\n",
-                        icona, r.nome, r.percEntrate, r.percUscite, r.saldo);
-            }
-            System.out.println("=".repeat(80) + "\n");
-
-        } catch (IOException e) {
-            System.err.println("Errore nel calcolo del saldo migratorio finale: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 
     public static List<MigrationInfo> getMigrationsToVisualize(String logPath, int anno, double sogliaPercentuale) {
         Map<String, Integer> migrazioni = new HashMap<>();
@@ -294,6 +148,103 @@ public class DataManager {
             return Collections.emptyList();
         }
     }
+    
+    public static void stampaSaldoAnnuale(String logPath, Map<String, Regione> regioni, int anno, int agentiPerRegione) throws IOException {
+        Map<String, Map<String, Integer>>[] saldi = calcolaSaldi(logPath, regioni, anno);
+        Map<String, Map<String, Integer>> entrate = saldi[0];
+        Map<String, Map<String, Integer>> uscite = saldi[1];
+
+        List<String> righeCSV = new ArrayList<>();
+        if (!Files.exists(Paths.get("data/saldo.csv"))) {
+            righeCSV.add("Anno,Regione,Categoria,Entrate_permille,Uscite_permille,Saldo_permille");
+        }
+
+        System.out.println("\n" + "=".repeat(80));
+        System.out.println(" SALDO MIGRATORIO ANNO " + (anno + 1) + " (‰ sulla popolazione reale per categoria)");
+        System.out.println("=".repeat(80));
+
+        for (String nomeRegione : regioni.keySet()) {
+            Regione regione = regioni.get(nomeRegione);
+            double popolazioneReale = regione.popolazione;
+            System.out.println("\n  " + nomeRegione.toUpperCase() + ":");
+
+            for (String categoria : entrate.get(nomeRegione).keySet()) {
+                int in = entrate.get(nomeRegione).get(categoria);
+                int out = uscite.get(nomeRegione).get(categoria);
+                double popolazioneCategoria = calcolaPopulazioneCategoria(categoria, popolazioneReale);
+                double fattoreScala = popolazioneCategoria / (agentiPerRegione / 8.0);
+                double permilleEntrate = (in * fattoreScala / popolazioneCategoria) * 1000;
+                double permilleUscite = (out * fattoreScala / popolazioneCategoria) * 1000;
+                double saldoPermille = permilleEntrate - permilleUscite;
+
+                if (in > 0 || out > 0) {
+                    System.out.printf("   %s: +%.1f‰ guadagnati, -%.1f‰ persi → saldo %.1f‰\n",
+                            categoria, permilleEntrate, permilleUscite, saldoPermille);
+                }
+                righeCSV.add(String.format(Locale.US, "%d,%s,%s,%.1f,%.1f,%.1f",
+                        anno + 1, nomeRegione, categoria, permilleEntrate, permilleUscite, saldoPermille));
+            }
+        }
+        System.out.println("=".repeat(80) + "\n");
+
+        Files.write(Paths.get("data/saldo.csv"), righeCSV, StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    public static void stampaSaldoFinale(String logPath, Map<String, Regione> regioni, int agentiPerRegione) throws IOException {
+        Map<String, Map<String, Integer>>[] saldi = calcolaSaldi(logPath, regioni, null);
+        Map<String, Map<String, Integer>> entrate = saldi[0];
+        Map<String, Map<String, Integer>> uscite = saldi[1];
+
+        List<String> righeCSV = new ArrayList<>();
+        righeCSV.add("FINALE,TOTALE_SIMULAZIONE,---,---,---,---");
+
+        System.out.println("\n" + "=".repeat(80));
+        System.out.println(" SALDO MIGRATORIO FINALE - INTERA SIMULAZIONE (‰ sulla popolazione reale per categoria)");
+        System.out.println("=".repeat(80));
+
+        for (String nomeRegione : regioni.keySet()) {
+            Regione regione = regioni.get(nomeRegione);
+            double popolazioneReale = regione.popolazione;
+            System.out.println("\n  " + nomeRegione.toUpperCase() + ":");
+
+            for (String categoria : entrate.get(nomeRegione).keySet()) {
+                int in = entrate.get(nomeRegione).get(categoria);
+                int out = uscite.get(nomeRegione).get(categoria);
+                double popolazioneCategoria = calcolaPopulazioneCategoria(categoria, popolazioneReale);
+                double fattoreScala = popolazioneCategoria / (agentiPerRegione / 8.0);
+                double permilleEntrate = (in * fattoreScala / popolazioneCategoria) * 1000;
+                double permilleUscite = (out * fattoreScala / popolazioneCategoria) * 1000;
+                double saldoPermille = permilleEntrate - permilleUscite;
+
+                if (in > 0 || out > 0) {
+                    System.out.printf("   %s: +%.1f‰ guadagnati, -%.1f‰ persi → saldo %.1f‰\n",
+                            categoria, permilleEntrate, permilleUscite, saldoPermille);
+                }
+                righeCSV.add(String.format(Locale.US, "FINALE,%s,%s,%.1f,%.1f,%.1f",
+                        nomeRegione, categoria, permilleEntrate, permilleUscite, saldoPermille));
+            }
+        }
+        System.out.println("=".repeat(80) + "\n");
+
+        Files.write(Paths.get("data/saldo.csv"), righeCSV, StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+    // Metodo helper per calcolare la popolazione approssimativa per categoria
+    private static double calcolaPopulazioneCategoria(String categoria, double popolazioneTotale) {
+        // Percentuali approssimative basate sui dati demografici italiani
+        switch (categoria) {
+            case "Lavoratore_Laurea": return popolazioneTotale * 0.08;      // 8%
+            case "Lavoratore_Diploma": return popolazioneTotale * 0.25;     // 25%
+            case "Lavoratore_Licenza": return popolazioneTotale * 0.15;     // 15%
+            case "Studente_Laurea": return popolazioneTotale * 0.03;        // 3%
+            case "Studente_Diploma": return popolazioneTotale * 0.05;       // 5%
+            case "Studente_Licenza": return popolazioneTotale * 0.02;       // 2%
+            case "Disoccupato": return popolazioneTotale * 0.10;            // 10%
+            case "Pensionato": return popolazioneTotale * 0.22;             // 22%
+            default: return popolazioneTotale * 0.125; // 1/8 se categoria sconosciuta
+        }
+    }
 
     public static class MigrationInfo {
         public String categoria;
@@ -306,20 +257,6 @@ public class DataManager {
             this.origine = origine;
             this.destinazione = destinazione;
             this.conteggio = conteggio;
-        }
-    }
-
-    private static class RegioneSaldo {
-        String nome;
-        double percEntrate;
-        double percUscite;
-        double saldo;
-
-        RegioneSaldo(String nome, double percEntrate, double percUscite, double saldo) {
-            this.nome = nome;
-            this.percEntrate = percEntrate;
-            this.percUscite = percUscite;
-            this.saldo = saldo;
         }
     }
 }

@@ -11,17 +11,13 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 												values="60 120 300 500 "
 											/>
+
+											/>
 				<parameter name="migrationThreshold" displayName="migrationThreshold" type="double" 
 						defaultValue="0.1" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 												values="0.1 0.5 0.2 "
-											/>
-				<parameter name="dataset" displayName="dataset" type="java.lang.String" 
-						defaultValue="regioni_istat.csv" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
-												values="'regioni_istat.csv' 'divario_ampliato.csv' "
 											/>
 		</parameters>
 

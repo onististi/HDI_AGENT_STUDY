@@ -3,15 +3,8 @@ package simulation.agent;
 import simulation.context.Regione;
 import simulation.utils.DataManager;
 import simulation.utils.DecisionUtils;
-import repast.simphony.context.Context;
-import repast.simphony.engine.schedule.ScheduledMethod;
-import repast.simphony.space.gis.Geography;
-import repast.simphony.space.grid.*;
-import repast.simphony.util.ContextUtils;
-
+import repast.simphony.engine.schedule.ScheduleParameters;
 import java.util.*;
-
-import org.locationtech.jts.geom.GeometryFactory;
 
 public class Agent {
     private static int counter = 0;
@@ -22,17 +15,15 @@ public class Agent {
     private boolean famiglia;
     private int anniStabile;
     private int anniDisoccupato;
-    int iterazione=1;
+    int iterazione = 1;
     private final Map<String, Double> utilityWeights;
     private final Map<String, Double> pushpullWeights;
     private final List<Regione> regioni;
     private final Random rnd = new Random();
     private double wG, wU, wP;
+    private int decisionMonth; // Nuovo campo per il mese decisionale
 
-    public Agent(Regione r, String cat, int eta, boolean fam,
-                 int anniStabile, int anniDisoccupato,
-                 Map<String, Double> uw, Map<String, Double> ppw,
-                 List<Regione> regList) {
+    public Agent(Regione r, String cat, int eta, boolean fam,int anniStabile, int anniDisoccupato,Map<String, Double> uw, Map<String, Double> ppw, List<Regione> regList) {
         this.id = counter++;
         this.regione = r;
         this.categoria = cat;
@@ -43,6 +34,15 @@ public class Agent {
         this.utilityWeights = new HashMap<>(uw);
         this.pushpullWeights = new HashMap<>(ppw);
         this.regioni = regList;
+        
+        // Schedulazione programmatica del metodo step() per distribuire calcoli per le scelte(con quindi anche le scritture) per alleggerire
+        this.decisionMonth = rnd.nextInt(12);
+        
+        double startTick = decisionMonth + 1; // Tick di partenza basato sul mese
+        ScheduleParameters params = ScheduleParameters.createRepeating(startTick, 12);
+        repast.simphony.engine.environment.RunEnvironment.getInstance()
+            .getCurrentSchedule()
+            .schedule(params, this, "step");
     }
 
     public static Agent creaRandom(Regione r, List<Regione> tutte) {
@@ -99,7 +99,7 @@ public class Agent {
         return a;
     }
 
-    @ScheduledMethod(start = 1, interval = 12)
+    // schedulato nel costruttore
     public void step() {
         if (rnd.nextDouble() < 0.05) famiglia = !famiglia;
 
@@ -134,19 +134,18 @@ public class Agent {
 
             if (emigrato) {
                 regione = dest;
-                
                 anniStabile = 0;
                 if (categoria.contains("Disoccupato")) anniDisoccupato++;
                 break;
-            }else {
-            	if (categoria.contains("Disoccupato")) anniDisoccupato++;
+            } else {
+                if (categoria.contains("Disoccupato")) anniDisoccupato++;
                 else anniStabile++;
             }
         }
         
         if (!righe.isEmpty()) {
             int tickCorrente = (int) repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule().getTickCount();
-            int annoCorrente = (int) Math.ceil(tickCorrente / 12);
+            int annoCorrente = (int) Math.ceil((double) tickCorrente / 12); // Correzione con cast a double
             DataManager.appendToCSV("data/log.csv", righe, iterazione);
         }
 
@@ -154,6 +153,7 @@ public class Agent {
         iterazione++;
     }
 
+    // Altri metodi rimangono invariati
     public String getCategoria() { return categoria; }
     public boolean isFamiglia() { return famiglia; }
     public int getEta() { return eta; }
