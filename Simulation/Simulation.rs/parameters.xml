@@ -5,23 +5,46 @@
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 											/>
-				<parameter name="agentiPerRegione" displayName="agentiPerRegione" type="int" 
-						defaultValue="60" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
-												values="60 120 300 500 "
-											/>
-				<parameter name="migrationThreshold" displayName="migrationThreshold" type="double" 
-						defaultValue="0.1" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
-												values="0.1 0.5 0.2 "
-											/>
+											
 				<parameter name="dataset" displayName="dataset" type="java.lang.String" 
 						defaultValue="regioni_istat.csv" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
 												values="'regioni_istat.csv' 'divario_ampliato.csv' "
+											/>
+											
+				<parameter name="agentiPerRegione" displayName="agentiPerRegione" type="int" 
+						defaultValue="1000" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+												values="1000 50 100 200 300 500 2000"
+											/>
+											
+				<parameter name="numeroScelteRegioni" displayName="numeroSceltePerAgente" type="int" 
+						defaultValue="3" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+												values="3 6 10 19"
+											/>
+				<parameter name="durataSimulazione" displayName="durataSimulazione" type="int" 
+						defaultValue="23" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+												values="23 24 48 60 120"
+											/>
+											
+				<parameter name="setFascia" displayName="set Fascia età" type="java.lang.String" 
+						defaultValue="False" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
+												values="'False' '18' '18-30' '25' '35-60' '35' '50-60'"
+											/>
+												
+				<parameter name="migrationThreshold" displayName="migrationThreshold" type="double" 
+						defaultValue="0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+												values="0 0.1 0.5 0.2 "
 											/>
 		</parameters>
 

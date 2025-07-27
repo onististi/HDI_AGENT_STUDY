@@ -3,12 +3,12 @@
   <type>GIS 3D</type>
   <styles>
     <entry>
-      <string>simulation.context.Regione</string>
-      <string>repast.simphony.visualization.gis3D.style.EditedMarkStyle</string>
-    </entry>
-    <entry>
       <string>simulation.visualization.MigrationMarker</string>
       <string>simulation.visualization.MigrationAnimation</string>
+    </entry>
+    <entry>
+      <string>simulation.context.Regione</string>
+      <string>repast.simphony.visualization.gis3D.style.EditedMarkStyle</string>
     </entry>
   </styles>
   <editedStyles>

@@ -1,0 +1,214 @@
+=== SALDO MIGRATORIO FINALE PER REGIONE ===
+
+REGIONE: Trentino-Alto Adige
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,0,14,14,0.00,0.14,0.14
+1,Disoccupato_Laurea,0,6,6,0.00,0.06,0.06
+2,Disoccupato_Diploma,0,18,18,0.00,0.18,0.18
+2,Disoccupato_Laurea,0,5,5,0.00,0.05,0.05
+TOTALE,Trentino-Alto Adige,0,43,43,0.00,0.43,0.43
+
+REGIONE: Calabria
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+1,Lavoratore_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Laurea,5,0,-5,0.05,0.00,-0.05
+2,Disoccupato_Diploma,6,0,-6,0.06,0.00,-0.06
+2,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Lavoratore_Diploma,2,0,-2,0.02,0.00,-0.02
+TOTALE,Calabria,19,0,-19,0.19,0.00,-0.19
+
+REGIONE: Veneto
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+2,Disoccupato_Diploma,2,0,-2,0.02,0.00,-0.02
+TOTALE,Veneto,2,0,-2,0.02,0.00,-0.02
+
+REGIONE: Sardegna
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Disoccupato_Diploma,2,0,-2,0.02,0.00,-0.02
+2,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+TOTALE,Sardegna,6,0,-6,0.06,0.00,-0.06
+
+REGIONE: Molise
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,16,0,-16,0.16,0.00,-0.16
+1,Disoccupato_Laurea,6,0,-6,0.06,0.00,-0.06
+1,Lavoratore_Diploma,6,0,-6,0.06,0.00,-0.06
+1,Lavoratore_Laurea,10,0,-10,0.10,0.00,-0.10
+2,Disoccupato_Diploma,3,0,-3,0.03,0.00,-0.03
+2,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Lavoratore_Diploma,11,0,-11,0.11,0.00,-0.11
+2,Lavoratore_Laurea,3,0,-3,0.03,0.00,-0.03
+TOTALE,Molise,56,0,-56,0.56,0.00,-0.56
+
+REGIONE: Campania
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,30,0,-30,0.30,0.00,-0.30
+1,Disoccupato_Laurea,3,0,-3,0.03,0.00,-0.03
+1,Lavoratore_Diploma,10,0,-10,0.10,0.00,-0.10
+1,Lavoratore_Laurea,3,0,-3,0.03,0.00,-0.03
+2,Disoccupato_Diploma,13,0,-13,0.13,0.00,-0.13
+2,Disoccupato_Laurea,3,0,-3,0.03,0.00,-0.03
+2,Lavoratore_Diploma,8,0,-8,0.08,0.00,-0.08
+2,Lavoratore_Laurea,2,0,-2,0.02,0.00,-0.02
+TOTALE,Campania,72,0,-72,0.72,0.00,-0.72
+
+REGIONE: Abruzzo
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,1,2,1,0.01,0.02,0.01
+1,Disoccupato_Laurea,9,1,-8,0.09,0.01,-0.08
+1,Lavoratore_Diploma,1,0,-1,0.01,0.00,-0.01
+1,Lavoratore_Laurea,4,0,-4,0.04,0.00,-0.04
+2,Disoccupato_Diploma,7,0,-7,0.07,0.00,-0.07
+2,Disoccupato_Laurea,4,0,-4,0.04,0.00,-0.04
+2,Lavoratore_Laurea,1,0,-1,0.01,0.00,-0.01
+TOTALE,Abruzzo,27,3,-24,0.27,0.03,-0.24
+
+REGIONE: Puglia
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,1,0,-1,0.01,0.00,-0.01
+1,Disoccupato_Laurea,0,1,1,0.00,0.01,0.01
+2,Disoccupato_Diploma,1,0,-1,0.01,0.00,-0.01
+TOTALE,Puglia,2,1,-1,0.02,0.01,-0.01
+
+REGIONE: Piemonte
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,2,1,-1,0.02,0.01,-0.01
+1,Disoccupato_Laurea,0,1,1,0.00,0.01,0.01
+2,Disoccupato_Diploma,3,4,1,0.03,0.04,0.01
+2,Disoccupato_Laurea,1,6,5,0.01,0.06,0.05
+2,Lavoratore_Laurea,1,0,-1,0.01,0.00,-0.01
+TOTALE,Piemonte,7,12,5,0.07,0.12,0.05
+
+REGIONE: Basilicata
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,3,0,-3,0.03,0.00,-0.03
+1,Disoccupato_Laurea,3,0,-3,0.03,0.00,-0.03
+1,Lavoratore_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Laurea,5,0,-5,0.05,0.00,-0.05
+2,Disoccupato_Diploma,2,0,-2,0.02,0.00,-0.02
+2,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Lavoratore_Laurea,2,0,-2,0.02,0.00,-0.02
+TOTALE,Basilicata,18,0,-18,0.18,0.00,-0.18
+
+REGIONE: Friuli-Venezia Giulia
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,0,2,2,0.00,0.02,0.02
+2,Disoccupato_Diploma,0,1,1,0.00,0.01,0.01
+TOTALE,Friuli-Venezia Giulia,0,3,3,0.00,0.03,0.03
+
+REGIONE: Toscana
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,3,1,-2,0.03,0.01,-0.02
+1,Disoccupato_Laurea,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Diploma,1,0,-1,0.01,0.00,-0.01
+1,Lavoratore_Laurea,3,0,-3,0.03,0.00,-0.03
+2,Disoccupato_Diploma,10,2,-8,0.10,0.02,-0.08
+2,Disoccupato_Laurea,0,1,1,0.00,0.01,0.01
+2,Lavoratore_Laurea,6,0,-6,0.06,0.00,-0.06
+TOTALE,Toscana,25,4,-21,0.25,0.04,-0.21
+
+REGIONE: Lombardia
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,0,9,9,0.00,0.09,0.09
+1,Disoccupato_Laurea,0,5,5,0.00,0.05,0.05
+1,Lavoratore_Diploma,0,2,2,0.00,0.02,0.02
+1,Lavoratore_Laurea,0,13,13,0.00,0.13,0.13
+2,Disoccupato_Diploma,0,7,7,0.00,0.07,0.07
+2,Disoccupato_Laurea,3,5,2,0.03,0.05,0.02
+2,Lavoratore_Laurea,0,4,4,0.00,0.04,0.04
+TOTALE,Lombardia,3,45,42,0.03,0.45,0.42
+
+REGIONE: Marche
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,0,10,10,0.00,0.10,0.10
+1,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Disoccupato_Diploma,0,9,9,0.00,0.09,0.09
+2,Disoccupato_Laurea,0,1,1,0.00,0.01,0.01
+TOTALE,Marche,1,20,19,0.01,0.20,0.19
+
+REGIONE: Liguria
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,3,0,-3,0.03,0.00,-0.03
+1,Disoccupato_Laurea,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Laurea,9,0,-9,0.09,0.00,-0.09
+2,Disoccupato_Diploma,7,0,-7,0.07,0.00,-0.07
+2,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Lavoratore_Laurea,1,0,-1,0.01,0.00,-0.01
+TOTALE,Liguria,25,0,-25,0.25,0.00,-0.25
+
+REGIONE: Lazio
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,0,18,18,0.00,0.18,0.18
+1,Disoccupato_Laurea,0,13,13,0.00,0.13,0.13
+1,Lavoratore_Diploma,0,23,23,0.00,0.23,0.23
+1,Lavoratore_Laurea,0,25,25,0.00,0.25,0.25
+2,Disoccupato_Diploma,0,13,13,0.00,0.13,0.13
+2,Disoccupato_Laurea,0,3,3,0.00,0.03,0.03
+2,Lavoratore_Diploma,0,20,20,0.00,0.20,0.20
+2,Lavoratore_Laurea,0,10,10,0.00,0.10,0.10
+TOTALE,Lazio,0,125,125,0.00,1.25,1.25
+
+REGIONE: Umbria
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,0,5,5,0.00,0.05,0.05
+1,Disoccupato_Laurea,0,1,1,0.00,0.01,0.01
+1,Lavoratore_Laurea,1,0,-1,0.01,0.00,-0.01
+2,Disoccupato_Diploma,0,2,2,0.00,0.02,0.02
+2,Disoccupato_Laurea,1,0,-1,0.01,0.00,-0.01
+TOTALE,Umbria,2,8,6,0.02,0.08,0.06
+
+REGIONE: Valle d'Aosta
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,1,0,-1,0.01,0.00,-0.01
+2,Disoccupato_Laurea,2,0,-2,0.02,0.00,-0.02
+TOTALE,Valle d'Aosta,3,0,-3,0.03,0.00,-0.03
+
+REGIONE: Emilia-Romagna
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,1,5,4,0.01,0.05,0.04
+1,Disoccupato_Laurea,0,2,2,0.00,0.02,0.02
+1,Lavoratore_Diploma,0,1,1,0.00,0.01,0.01
+1,Lavoratore_Laurea,0,4,4,0.00,0.04,0.04
+2,Disoccupato_Diploma,3,6,3,0.03,0.06,0.03
+2,Disoccupato_Laurea,3,1,-2,0.03,0.01,-0.02
+2,Lavoratore_Diploma,0,1,1,0.00,0.01,0.01
+2,Lavoratore_Laurea,0,6,6,0.00,0.06,0.06
+TOTALE,Emilia-Romagna,7,26,19,0.07,0.26,0.19
+
+REGIONE: Sicilia
+Anno,Categoria,Emigrazioni,Immigrazioni,Saldo_Assoluto,Emigrazioni_‰,Immigrazioni_‰,Saldo_‰
+1,Disoccupato_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Disoccupato_Laurea,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Diploma,2,0,-2,0.02,0.00,-0.02
+1,Lavoratore_Laurea,2,0,-2,0.02,0.00,-0.02
+2,Disoccupato_Diploma,3,0,-3,0.03,0.00,-0.03
+2,Lavoratore_Laurea,4,0,-4,0.04,0.00,-0.04
+TOTALE,Sicilia,15,0,-15,0.15,0.00,-0.15
+
+=== RIASSUNTO GENERALE ===
+Regione,Emigrazioni_Totali,Immigrazioni_Totali,Saldo_Assoluto,Emigrazioni_percento,Immigrazioni_percento,Saldo_percento
+Trentino-Alto Adige,0,43,43,0.00,4.30,4.30
+Calabria,19,0,-19,1.90,0.00,-1.90
+Veneto,2,0,-2,0.20,0.00,-0.20
+Sardegna,6,0,-6,0.60,0.00,-0.60
+Molise,56,0,-56,5.60,0.00,-5.60
+Campania,72,0,-72,7.20,0.00,-7.20
+Abruzzo,27,3,-24,2.70,0.30,-2.40
+Puglia,2,1,-1,0.20,0.10,-0.10
+Piemonte,7,12,5,0.70,1.20,0.50
+Basilicata,18,0,-18,1.80,0.00,-1.80
+Friuli-Venezia Giulia,0,3,3,0.00,0.30,0.30
+Toscana,25,4,-21,2.50,0.40,-2.10
+Lombardia,3,45,42,0.30,4.50,4.20
+Marche,1,20,19,0.10,2.00,1.90
+Liguria,25,0,-25,2.50,0.00,-2.50
+Lazio,0,125,125,0.00,12.50,12.50
+Umbria,2,8,6,0.20,0.80,0.60
+Valle d'Aosta,3,0,-3,0.30,0.00,-0.30
+Emilia-Romagna,7,26,19,0.70,2.60,1.90
+Sicilia,15,0,-15,1.50,0.00,-1.50

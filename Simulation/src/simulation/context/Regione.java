@@ -11,13 +11,16 @@ public class Regione {
     public double affitto;
     public double servizi;
     public Coordinate coordinate;
+    
     public Point location;
-    private int coordX;
-    private int coordY;
+    public double fattoreFamiliare; 
+    public double pctLaureati;
+    public double disoccLaurea;
+    public double disoccDiploma;
 
     public Regione(String nome, double popolazione, double salario, double occupazione,
-                   double istruzione, double affitto, double servizi,
-                   Coordinate coord) {
+                   double istruzione, double affitto, double servizi, double fattoreFamiliare,
+                   Coordinate coord, double pctLaureati, double disoccLaurea, double disoccDiploma) {
         this.nome = nome;
         this.popolazione = popolazione;
         this.salario = salario;
@@ -26,15 +29,10 @@ public class Regione {
         this.affitto = affitto;
         this.servizi = servizi;
         this.coordinate = coord;
-    }
-
-    public int getX() {return coordX;}
-
-    public int getY() {	return coordY;}
-
-    public void setCoord(int x, int y) {
-        this.coordX = x;
-        this.coordY = y;
+        this.fattoreFamiliare = fattoreFamiliare;
+        this.pctLaureati = pctLaureati;
+        this.disoccLaurea = disoccLaurea;
+        this.disoccDiploma = disoccDiploma;
     }
     public String getNome() {return this.nome;}
 	}

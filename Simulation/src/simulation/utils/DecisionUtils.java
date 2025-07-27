@@ -1,8 +1,25 @@
 package simulation.utils;import simulation.agent.Agent;
-import simulation.context.Regione;import java.util.*;public class DecisionUtils {
+import simulation.context.Regione;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Point;
+import java.util.*;
+public class DecisionUtils {
 
-public static final Map<String, Map<String, Double>> utilityWeightsByCat = Map.of(
-        "Disoccupato_Diploma", Map.of("Salario", 0.2, "Occupazione", 0.4, "Istruzione", 0.1, "Affitto", 0.25),
+    public static final double[] AGE_DISTRIBUTION_CUMULATIVE = {
+        0.08,   // 18–22 (8%)
+        0.18,   // 23–27 (10%)
+        0.30,   // 28–32 (12%)
+        0.44,   // 33–37 (14%)
+        0.60,   // 38–42 (16%)
+        0.78,   // 43–47 (18%)
+        0.92,   // 48–52 (14%)
+        0.98,   // 53–57 (6%)
+        0.995,  // 58–62 (1.5%)
+        1.000   // 63–64 (0.5%)
+    };
+
+    public static final Map<String, Map<String, Double>> utilityWeightsByCat = Map.of(
+        "Disoccupato_Diploma", Map.of("Salario", 0.2, "Occupazione", 0.4, "Istruzione", 0.15, "Affitto", 0.25),
         "Disoccupato_Laurea", Map.of("Salario", 0.25, "Occupazione", 0.25, "Istruzione", 0.25, "Affitto", 0.25),
         "Lavoratore_Diploma", Map.of("Salario", 0.35, "Occupazione", 0.45, "Istruzione", 0.01, "Affitto", 0.19),
         "Lavoratore_Laurea", Map.of("Salario", 0.3, "Occupazione", 0.3, "Istruzione", 0.3, "Affitto", 0.1)
@@ -10,9 +27,9 @@ public static final Map<String, Map<String, Double>> utilityWeightsByCat = Map.o
 
     public static final Map<String, Map<String, Double>> pushpullWeightsByCat = Map.of(
         "Disoccupato_Diploma", Map.of("Salario", 0.3, "Occupazione", 0.5, "Servizi", 0.2),
-        "Disoccupato_Laurea", Map.of("Salario", 0.35, "Occupazione", 0.35, "Servizi", 0.3),
-        "Lavoratore_Diploma", Map.of("Salario", 0.3, "Occupazione", 0.35, "Servizi", 0.35),
-        "Lavoratore_Laurea", Map.of("Salario", 0.45, "Occupazione", 0.25, "Servizi", 0.3)
+        "Disoccupato_Laurea", Map.of("Salario", 0.35, "Occupazione", 0.3, "Servizi", 0.35),
+        "Lavoratore_Diploma", Map.of("Salario", 0.3, "Occupazione", 0.40, "Servizi", 0.3),
+        "Lavoratore_Laurea", Map.of("Salario", 0.45, "Occupazione", 0.2, "Servizi", 0.35)
     );
     
       /**
@@ -139,24 +156,41 @@ public static double sogliaDecisionale(Agent a, double distanza) {
     int eta = a.getEta();
     int anniStabile = a.getAnniStabile();
     int anniDisoccupato = a.getAnniDisoccupato();
+    int anniLavorati = a.getAnniLavorati(); // New parameter
     boolean famiglia = a.isFamiglia();
 
     double soglia = switch (categoria) {
         case "Disoccupato_Diploma" -> 0.3;
         case "Disoccupato_Laurea" -> 0.2;
-        case "Lavoratore_Diploma" -> 0.35;
-        case "Lavoratore_Laurea" -> 0.25;
+        case "Lavoratore_Diploma" -> 0.45;
+        case "Lavoratore_Laurea" -> 0.35;
         default -> 0.25;
     };
 
-    if (famiglia) soglia += 0.12;
-    if (eta > 35) soglia += Math.ceil(eta / 10.0) * 0.05;
-    if (anniStabile > 2) soglia += anniStabile * 0.08;
-    if (categoria.contains("Disoccupato") && anniDisoccupato < 2) soglia += 0.01;
+    if (famiglia) soglia += 0.10;
 
-    return soglia + ((distanza > 200) ? ((distanza - 200) / 100.0) * 0.05 : 0);
+    if (eta > 35) soglia += Math.ceil((eta - 35) / 10.0) * 0.04; // Adjusts from 35 onward
+
+    double stabilityFactor = (anniStabile + (categoria.contains("Lavoratore") ? anniLavorati * 0.5 : anniLavorati * 0.3));
+    if (stabilityFactor > 2) {
+        soglia += (stabilityFactor - 2) * 0.08; // Penalty increases with stability beyond 2 years
+    }
+
+    //adjustment della soglia per i disoccupati, se hanno esperienze lavorative passate e sono disoccupati da poco sono portati a rimanere nella regione
+    if (categoria.contains("Disoccupato")) {
+        if (anniDisoccupato < 2) {
+            soglia += 0.02; // piccolo incremento per recenti disoccupati
+        } else if (anniDisoccupato > 2) {
+            double unemploymentPenalty = -0.03 * (anniDisoccupato - 2); 
+            double workStabilityBonus = anniLavorati * 0.01; 
+            soglia += Math.max(-0.20, unemploymentPenalty + workStabilityBonus); //cap penalty
+        }
+    }
+
+    soglia += (distanza > 200) ? ((distanza - 200) / 100.0) * 0.07 : 0;
+
+    return Math.max(0.0, Math.min(2.5, soglia)); // Ensure threshold is between 0 and 2.5
 }
-
 public static void adjustWeights(Agent a) {
     double wG = 0.33, wU = 0.33, wP = 0.34;
     if (a.isFamiglia()) {

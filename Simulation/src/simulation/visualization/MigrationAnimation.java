@@ -7,7 +7,7 @@ import gov.nasa.worldwind.render.WWTexture;
 import repast.simphony.visualization.gis3D.PlaceMark;
 import repast.simphony.visualization.gis3D.style.MarkStyle;
 import simulation.utils.DataManager.MigrationInfo;
-import java.awt.*;
+import java.awt.*;	
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;

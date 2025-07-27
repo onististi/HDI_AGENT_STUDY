@@ -35,8 +35,8 @@ public class MigrationReporter {
     @ScheduledMethod(start = 12, interval = 12, priority = 1)
     public void stampa() throws IOException {
         int currentTick = (int) RunEnvironment.getInstance().getCurrentSchedule().getTickCount();
-        int anno = (currentTick - 12) / 12; // Year 0 at tick 12, year 1 at tick 24
-        DataManager.stampaSaldoAnnuale(logPath, regioniMap, anno, agentiPerRegione);
+        int anno = currentTick / 12;
+        	DataManager.stampaSaldoAnnuale(anno, agentiPerRegione, regioniMap);
     }
     
     @ScheduledMethod(start = 10, interval = 0.5, priority = 1)
@@ -74,17 +74,6 @@ public class MigrationReporter {
                 System.err.println("Errore nella rimozione del marker: " + e.getMessage());
             }
         }
-        
-      /*  if (currentTick % 5 == 0) { // Ogni 5 tick per non riempire troppo i log
-            System.out.println("=== STATO ANIMAZIONI al tick " + currentTick + " ===");
-            System.out.println("Animazioni attive: " + activeAnimations.size());
-            for (MigrationMarker marker : activeAnimations) {
-                System.out.println("  - " + marker.getMigration().origine + " -> " + 
-                                 marker.getMigration().destinazione + 
-                                 " (Progress: " + String.format("%.3f", marker.getProgress()) + ")");
-            }
-            System.out.println("=====================================");
-        }*/
     }
 
     @ScheduledMethod(start = 12, interval = 12, priority = 2)
@@ -101,8 +90,7 @@ public class MigrationReporter {
         if (anno == lastProcessedYear)return;
         lastProcessedYear = anno;
         
-        List<DataManager.MigrationInfo> migrations = DataManager.getMigrationsToVisualize(
-            logPath, anno, migrationThreshold);
+        List<DataManager.MigrationInfo> migrations = DataManager.getMigrationsToVisualize(logPath, anno, migrationThreshold);
 
         for (DataManager.MigrationInfo migration : migrations) {
             double percentage = (double) migration.conteggio / agentiPerRegione;
