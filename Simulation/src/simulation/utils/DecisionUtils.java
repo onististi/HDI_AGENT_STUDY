@@ -5,18 +5,19 @@ import org.locationtech.jts.geom.Point;
 import java.util.*;
 public class DecisionUtils {
 
-    public static final double[] AGE_DISTRIBUTION_CUMULATIVE = {
-        0.08,   // 18–22 (8%)
-        0.18,   // 23–27 (10%)
-        0.30,   // 28–32 (12%)
-        0.44,   // 33–37 (14%)
-        0.60,   // 38–42 (16%)
-        0.78,   // 43–47 (18%)
-        0.92,   // 48–52 (14%)
-        0.98,   // 53–57 (6%)
-        0.995,  // 58–62 (1.5%)
-        1.000   // 63–64 (0.5%)
-    };
+	public static final double[] AGE_DISTRIBUTION_CUMULATIVE = {
+		    0.071,   // 18–22 → 7.1%
+		    0.164,   // 23–27 → 9.3%
+		    0.276,   // 28–32 → 11.2%
+		    0.404,   // 33–37 → 12.8%
+		    0.541,   // 38–42 → 13.7%
+		    0.687,   // 43–47 → 14.6%
+		    0.824,   // 48–52 → 13.7%
+		    0.931,   // 53–57 → 10.7%
+		    0.996,   // 58–62 → 6.5%
+		    1.000    // 63–64 → 1.4%
+		};
+
 
     public static final Map<String, Map<String, Double>> utilityWeightsByCat = Map.of(
         "Disoccupato_Diploma", Map.of("Salario", 0.2, "Occupazione", 0.4, "Istruzione", 0.15, "Affitto", 0.25),
@@ -151,46 +152,148 @@ public static double distanza(Regione a, Regione b) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+
 public static double sogliaDecisionale(Agent a, double distanza) {
     String categoria = a.getCategoria();
     int eta = a.getEta();
     int anniStabile = a.getAnniStabile();
     int anniDisoccupato = a.getAnniDisoccupato();
-    int anniLavorati = a.getAnniLavorati(); // New parameter
+    int anniLavorati = a.getAnniLavorati();
     boolean famiglia = a.isFamiglia();
 
+    // Base soglia per categoria
     double soglia = switch (categoria) {
-        case "Disoccupato_Diploma" -> 0.3;
-        case "Disoccupato_Laurea" -> 0.2;
-        case "Lavoratore_Diploma" -> 0.45;
-        case "Lavoratore_Laurea" -> 0.35;
-        default -> 0.25;
+        case "Disoccupato_Diploma" -> 0.25;
+        case "Disoccupato_Laurea" -> 0.20; 
+        case "Lavoratore_Diploma" -> 0.32;
+        case "Lavoratore_Laurea" -> 0.2;   // Più mobili dei diplomati
+        default -> 0.20;
     };
 
-    if (famiglia) soglia += 0.10;
 
-    if (eta > 35) soglia += Math.ceil((eta - 35) / 10.0) * 0.04; // Adjusts from 35 onward
-
-    double stabilityFactor = (anniStabile + (categoria.contains("Lavoratore") ? anniLavorati * 0.5 : anniLavorati * 0.3));
-    if (stabilityFactor > 2) {
-        soglia += (stabilityFactor - 2) * 0.08; // Penalty increases with stability beyond 2 years
+    double etaFactor = 0.0;
+    if (eta <= 27) {
+        double t = (27 - Math.max(18, eta)) / 9.0;  // normalizzato da 18 a 27 anni
+        etaFactor = -0.035 * t;
+        
+        if (categoria.contains("Laurea") && eta <= 26) { // Bonus neolaureati (leggermente ridotto: spesso sono gia emigrati in un altra regione per l'universita)
+            etaFactor -= 0.04;
+        }
+    }
+    else if (eta <= 35) {
+        // Fascia 28-35: LEGGERO BONUS per correggere il crollo dato da percentuale famiglia
+        etaFactor = -0.02 * (1.0 - (eta - 28) / 7.0);  // Piccolo bonus, max -0.02 per i 28enni
+    }
+    else if (eta <= 40) {
+        // Fascia 35-40: leggera resistenza crescente
+        etaFactor = 0.08 * ((eta - 35) / 5.0);  
+    }
+    else if (eta <= 50) {
+        // Fascia 40-50
+        etaFactor = 0.09 * ((eta - 35) / 15.0);  // max +0.09 a 50 anni
+    }
+    else { // Over 50
+        etaFactor = 0.095 + 0.19 * Math.min(1.0, (eta - 50) / 15.0);  // Da +0.095 (a 50) a +0.28 max
     }
 
-    //adjustment della soglia per i disoccupati, se hanno esperienze lavorative passate e sono disoccupati da poco sono portati a rimanere nella regione
-    if (categoria.contains("Disoccupato")) {
-        if (anniDisoccupato < 2) {
-            soglia += 0.02; // piccolo incremento per recenti disoccupati
-        } else if (anniDisoccupato > 2) {
-            double unemploymentPenalty = -0.03 * (anniDisoccupato - 2); 
-            double workStabilityBonus = anniLavorati * 0.01; 
-            soglia += Math.max(-0.20, unemploymentPenalty + workStabilityBonus); //cap penalty
+    soglia += etaFactor;
+
+//famiglia considerando gia l'età che influenza la probabilità di averla per evitare doppie penalizzazioni
+    if (famiglia) {
+        double famigliaFactor = 0.11;  // Base penalty uniforme
+        
+        // Mitigazione per professionisti qualificati con esperienza che possono permettersi trasferimenti familiari
+        if (categoria.contains("Laurea") && anniLavorati > 5) {
+            famigliaFactor *= 0.75;  // Riduce penalty del 25%
+        }
+        
+        // Mitigazione per lavoratori stabili con buon reddito
+        if (categoria.contains("Lavoratore") && anniStabile > 8) {
+            famigliaFactor *= 0.85;  // Riduce penalty del 15%
+        }
+        
+        soglia += famigliaFactor;
+    }
+
+
+    // stabilità lavorativa che considera sia esperienza che stabilità
+    if (categoria.contains("Lavoratore")) {
+        // Per i lavoratori: stabilità aumenta resistenza, ma esperienza può facilitare lo spostamento verso zone >utility
+        double stabilitaFactor = 0.0;
+        
+        if (anniStabile > 0) {
+            // Resistenza cresce logaritmicamente (non linearmente)
+            stabilitaFactor = 0.12 * Math.log(1 + anniStabile / 3.0);
+            
+            // Ma se ha molta esperienza totale, è più facile trovare lavoro altrove
+            if (anniLavorati > 8) {
+                stabilitaFactor *= 0.7;  // Riduce la resistenza del 30%
+            }
+            
+            // Bonus mobilità per professionisti senior altamente qualificati
+            if (categoria.contains("Laurea") && anniLavorati > 10 && eta < 45) {
+                stabilitaFactor *= 0.5;  // Dimezza la resistenza
+            }
+        }
+        
+        soglia += stabilitaFactor;
+    }
+    else if (categoria.contains("Disoccupato")) {
+        //disoccupati da poco incentivati a rimanere nel mercato del lavoro locale, bilanciato dall'esperienza che abbassa la soglia
+        
+        if (anniLavorati > 0) {
+            if (anniDisoccupato <= 1) {
+                soglia += 0.08;  
+            } else if (anniDisoccupato <= 3) {
+                soglia -= 0.05 * (anniDisoccupato - 1); 
+            } else {
+                soglia -= 0.10;  
+                
+                if (anniLavorati > 5) {
+                    soglia -= 0.08;
+                }
+            }
+        } else {             // Nessuna esperienza: più disposto a spostarsi se giovane (neo exstudente)
+            if (eta <= 25) {
+                soglia -= 0.12;
+            } else {
+                soglia -= 0.05;
+            }
         }
     }
 
-    soglia += (distanza > 200) ? ((distanza - 200) / 100.0) * 0.07 : 0;
+    //Distanza crescita esponenziale per mitigare punti centrali emigrazione
+    if (distanza > 100) {
+        double distanzaFactor = 0.0;
+        
+        if (distanza <= 300) { // 100-300 km: resistenza moderat
+            
+            distanzaFactor = (distanza - 100) / 200.0 * 0.15;  // Max +0.15
+        } else if (distanza <= 600) {
+            // 300-600 km: resistenza crescente
+            double t = (distanza - 300) / 300.0;
+            distanzaFactor = 0.15 + 0.25 * t;  // Da +0.15 a +0.40
+        } else {
+            // Over 600 km: resistenza alta ma non proibitiva
+            double t = Math.min(1.0, (distanza - 600) / 400.0);
+            distanzaFactor = 0.40 + 0.20 * t;  // Da +0.40 a +0.60 max
+        }
+        
+        // Mitigazione per professionisti altamente qualificati
+        if (categoria.contains("Laurea") && anniLavorati > 5) {
+            distanzaFactor *= 0.83;
+        }
+        
+        // Mitigazione per giovani (più adattabili) bilanciato da probabilità famiglia con crescita elevata dai 33
+        if (eta <= 30)
+            distanzaFactor *= 0.7;
+        
+        soglia += distanzaFactor;
+    }
 
-    return Math.max(0.0, Math.min(2.5, soglia)); // Ensure threshold is between 0 and 2.5
+    return Math.max(0.05, Math.min(3.5, soglia));  // Range esteso per gestire penalità distanza più alte
 }
+
 public static void adjustWeights(Agent a) {
     double wG = 0.33, wU = 0.33, wP = 0.34;
     if (a.isFamiglia()) {

@@ -1,2 +1,5 @@
 /bin/
 /.apt_generated/
+/data/log.csv
+/data/saldo_finale.csv
+/data/saldo.csv

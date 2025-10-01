@@ -24,7 +24,7 @@
 						defaultValue="3" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
-												values="3 6 10 19"
+												values="3 1 6 10 19"
 											/>
 				<parameter name="durataSimulazione" displayName="durataSimulazione" type="int" 
 						defaultValue="23" 

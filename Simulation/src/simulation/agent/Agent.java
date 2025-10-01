@@ -47,28 +47,24 @@ public class Agent {
         repast.simphony.engine.environment.RunEnvironment.getInstance().getCurrentSchedule().schedule(params, this, "step");
     }
 
+    
     public static boolean checkFamiglia(String cat, int eta, int anniStabile, int anniDisoccupato, int anniLavorati, Regione regione, Random rnd) {
-        
         double baseProb = switch (cat) {
             case "Disoccupato_Diploma" -> eta < 23 ? 0.025 : eta < 28 ? 0.045 : eta < 33 ? 0.15 : eta < 38 ? 0.2 : 0.5;
             case "Disoccupato_Laurea" -> eta < 23 ? 0.025 : eta < 28 ? 0.05 : eta < 33 ? 0.16 : eta < 38 ? 0.2 : 0.5;
-            case "Lavoratore_Diploma" -> eta < 23 ? 0.035 : eta < 28 ? 0.08 : eta < 33 ? 0.22 : eta < 38 ? 0.40 : 0.75;
-            case "Lavoratore_Laurea" -> eta < 23 ? 0.035 : eta < 28 ? 0.10 : eta < 33 ? 0.28 : eta < 38 ? 0.48 : 0.75;
+            case "Lavoratore_Diploma" -> eta < 23 ? 0.035 : eta < 28 ? 0.08 : eta < 33 ? 0.25 : eta < 38 ? 0.45 : 0.79;
+            case "Lavoratore_Laurea" -> eta < 23 ? 0.035 : eta < 28 ? 0.10 : eta < 33 ? 0.30 : eta < 38 ? 0.48 : 0.8;
             default -> eta < 23 ? 0.015 : eta < 28 ? 0.06 : eta < 33 ? 0.15 : eta < 38 ? 0.30 : 0.45;
         };
 
-        //probbilita in base alla sua carriera lavorativa
         if (cat.contains("Disoccupato")) {
-            baseProb = Math.max(0.005, baseProb - 0.02 * Math.min(anniDisoccupato, 10)); // penalita se unemplyed da molto max 0.20
-            baseProb += 0.01 * Math.min(anniLavorati, 10); // bonus se lavoratore stabile 
+            baseProb = Math.max(0.005, baseProb - 0.01 * Math.min(anniDisoccupato, 10));
+            baseProb += 0.01 * Math.min(anniLavorati, 10);
         } else if (cat.contains("Lavoratore")) {
-            baseProb = Math.min(1.0, baseProb + 0.01 * Math.min(anniStabile, 20)); 
+            baseProb = Math.min(1.0, baseProb + 0.01 * Math.min(anniStabile, 20));
         }
 
-        // curva per smoothare il cambiamento delle eta con picco a 37 anni
-        double logistic = 1.0 / (1.0 + Math.exp(-(eta - 37) / 6.0));
-
-        double finalProb = baseProb * logistic * regione.fattoreFamiliare;
+        double finalProb = baseProb * regione.fattoreFamiliare;
         return rnd.nextDouble() < Math.min(finalProb, 0.9);
     }
 
